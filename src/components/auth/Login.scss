@@ -66,16 +66,28 @@ html {
           border-radius: 5px;
         }
 
+        .brand-icon {
+          margin-right: 10px;
+        }
+
         .google-btn {
           margin-top: 25px;
           border: 1px solid #fa5d5d;
           background-color: #fa5d5d;
+
+          &:hover {
+            background-color: darken($color: #fa5d5d, $amount: 10);
+          }
         }
 
         .fb-btn {
           margin-top: 19px;
           border: 1px solid #1877f2;
           background-color: #1877f2;
+
+          &:hover {
+            background-color: darken($color: #1877f2, $amount: 10);
+          }
         }
       }
 
@@ -97,6 +109,7 @@ html {
 
         .accent {
           color: $accent-color;
+          cursor: pointer;
         }
 
         .forgot {
@@ -114,6 +127,10 @@ html {
           border: 1px solid $secondary-color;
           border-radius: 5px;
           font-size: 16px;
+
+          &:hover {
+            background-color: darken($color: $secondary-color, $amount: 10);
+          }
         }
 
         .register {
@@ -144,10 +161,12 @@ html {
         align-items: center;
 
         .card-left {
+          width: 100%;
           border: none;
         }
 
         .card-right {
+          width: 100%;
           margin-top: 30px;
           margin-bottom: 20px;
 
