@@ -2,9 +2,14 @@
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
   height: 100%;
-  font-family: Montserrat, sans-serif;
+}
+
+button {
+  cursor: pointer;
 }
