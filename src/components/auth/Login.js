@@ -1,13 +1,31 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
 import './Login.scss';
 
 const Login = () => {
   return (
-    <Grid container direction="row" justify="center" alignItems="center">
+    <div className="container">
       <h1>Expensave</h1>
-      Hello
-    </Grid>
+      <div className="card">
+        <h3>Log In</h3>
+        <div className="card-fields">
+          <div className="card-left">
+            <h5>Via social networking accounts</h5>
+            <button className="google-btn">Connect with Google</button>
+            <button className="fb-btn">Connect with Facebook</button>
+          </div>
+          <div className="card-right">
+            <h5>Using your own Expensave account</h5>
+            <input type="text" placeholder="Email Address"></input>
+            <input type="password" placeholder="Password"></input>
+            <p className="accent forgot">Forgot Password</p>
+            <button>Log In</button>
+            <p className="register">
+              Don't have an account? <span className="accent">Register</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

@@ -1,1 +1,125 @@
 @import '../../styles/index.scss';
+
+html {
+  background: linear-gradient(
+    to bottom,
+    $primary-color 410/1024 * 100%,
+    $light-color 0%
+  );
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    color: $white;
+    font-size: 70px;
+    font-weight: $font-weight-regular;
+    text-align: center;
+    margin-top: 114px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    width: 842/1440 * 100%;
+    height: 582px;
+    margin-top: 49px;
+    background: $white;
+    border-radius: 20px;
+    @include BoxShadow(2);
+
+    h3 {
+      color: $dark-color;
+      font-size: 40px;
+      font-weight: $font-weight-light;
+      text-align: center;
+      margin-top: 44px;
+    }
+
+    .card-fields {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+
+      h5 {
+        color: $dark-color;
+        font-size: 20px;
+        font-weight: $font-weight-light;
+        text-align: center;
+      }
+
+      .card-left {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+        border-right: 1px solid $dark-color;
+
+        button {
+          width: 300px;
+          height: 40px;
+          color: $white;
+          border-radius: 5px;
+        }
+
+        .google-btn {
+          margin-top: 25px;
+          border: 1px solid #fa5d5d;
+          background-color: #fa5d5d;
+        }
+
+        .fb-btn {
+          margin-top: 19px;
+          border: 1px solid #1877f2;
+          background-color: #1877f2;
+        }
+      }
+
+      .card-right {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 50%;
+
+        input {
+          width: 300px;
+          height: 61px;
+          margin-top: 20px;
+          font-size: 20px;
+          padding: 10px;
+          border: 1px solid $dark-color;
+          border-radius: 5px;
+        }
+
+        .accent {
+          color: $accent-color;
+        }
+
+        .forgot {
+          margin-top: 19px;
+          margin-left: auto;
+          margin-right: 32px;
+        }
+
+        button {
+          margin-top: 33px;
+          width: 300px;
+          height: 40px;
+          color: $white;
+          background-color: $secondary-color;
+          border: 1px solid $secondary-color;
+          border-radius: 5px;
+          font-size: 16px;
+        }
+
+        .register {
+          margin-top: 20px;
+          color: $dark-color;
+        }
+      }
+    }
+  }
+}

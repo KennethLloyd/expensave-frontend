@@ -4,3 +4,9 @@
 @import './exts/extensions';
 @import './mixins/mixins';
 @import './vars/vars';
+
+html,
+body {
+  font-family: $font-family;
+  font-weight: $font-weight-regular;
+}
