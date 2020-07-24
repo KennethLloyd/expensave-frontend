@@ -24,7 +24,7 @@ html {
   .card {
     display: flex;
     flex-direction: column;
-    width: 842/1440 * 100%;
+    width: 842px;
     height: 582px;
     margin-top: 49px;
     background: $white;
@@ -34,7 +34,7 @@ html {
     h3 {
       color: $dark-color;
       font-size: 40px;
-      font-weight: $font-weight-light;
+      font-weight: $font-weight-regular;
       text-align: center;
       margin-top: 44px;
     }
@@ -47,7 +47,7 @@ html {
       h5 {
         color: $dark-color;
         font-size: 20px;
-        font-weight: $font-weight-light;
+        font-weight: $font-weight-regular;
         text-align: center;
       }
 
@@ -59,6 +59,7 @@ html {
         border-right: 1px solid $dark-color;
 
         button {
+          font-size: $font-size;
           width: 300px;
           height: 40px;
           color: $white;
@@ -116,8 +117,50 @@ html {
         }
 
         .register {
+          display: flex;
           margin-top: 20px;
           color: $dark-color;
+
+          span {
+            margin-left: 4px;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 991px) {
+    .card {
+      width: 90%;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .card {
+      height: auto;
+
+      .card-fields {
+        flex-direction: column;
+        align-items: center;
+
+        .card-left {
+          border: none;
+        }
+
+        .card-right {
+          margin-top: 30px;
+          margin-bottom: 20px;
+
+          .accent {
+            text-align: center;
+          }
+
+          .register {
+            flex-direction: column;
+            span {
+              margin: 0;
+            }
+          }
         }
       }
     }

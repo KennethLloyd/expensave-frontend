@@ -19,9 +19,10 @@ const Login = () => {
             <input type="password" placeholder="Password"></input>
             <p className="accent forgot">Forgot Password</p>
             <button>Log In</button>
-            <p className="register">
-              Don't have an account? <span className="accent">Register</span>
-            </p>
+            <div className="register">
+              <p>Don't have an account?</p>
+              <span className="accent">Register</span>
+            </div>
           </div>
         </div>
       </div>
