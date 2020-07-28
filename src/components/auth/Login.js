@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import './Login.scss';
+import { GlobalContext } from '../../context/GlobalState';
 import { UserContext } from '../../context/UserState';
 
 const Login = () => {
@@ -9,6 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const { logIn } = useContext(UserContext);
+  const { errorMessage } = useContext(GlobalContext);
 
   const handleLogIn = () => {
     logIn({ email, password });
@@ -51,6 +54,18 @@ const Login = () => {
             ></input>
             <p className="accent forgot">Forgot Password</p>
             <button onClick={handleLogIn}>Log In</button>
+            {errorMessage ? (
+              <div className="error">
+                <FontAwesomeIcon
+                  icon={faExclamationCircle}
+                  className="error-icon"
+                />
+                &nbsp;
+                <p className="error-msg">{errorMessage}</p>
+              </div>
+            ) : (
+              ''
+            )}
             <div className="register">
               <p>Don't have an account?</p>&nbsp;
               <span className="accent">Register</span>

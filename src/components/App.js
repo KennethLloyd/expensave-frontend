@@ -3,7 +3,6 @@ import { Router, Switch } from 'react-router-dom';
 import { GlobalProvider } from '../context/GlobalState';
 import AuthenticatedRoute from './AuthenticatedRoute';
 import UnauthenticatedRoute from './UnauthenticatedRoute';
-import { UserProvider } from '../context/UserState';
 import Login from './auth/Login';
 import Dashboard from './dashboard/Dashboard';
 import './App.scss';
@@ -19,9 +18,6 @@ const App = () => {
           {/* <UnauthenticatedRoute path="/signup" exact component={UserSignUp} /> */}
         </Switch>
       </Router>
-      {/* <UserProvider>
-        <Login />
-      </UserProvider> */}
     </GlobalProvider>
   );
 };
