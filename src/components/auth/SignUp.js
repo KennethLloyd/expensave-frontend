@@ -8,23 +8,23 @@ import './Auth.scss';
 import { GlobalContext } from '../../context/GlobalState';
 import { UserContext } from '../../context/UserState';
 
-const Login = () => {
-  const { logIn } = useContext(UserContext);
+const SignUp = () => {
+  const { signUp } = useContext(UserContext);
   const { errorMessage } = useContext(GlobalContext);
 
-  const handleLogIn = (email, password) => {
-    logIn({ email, password });
+  const handleSignUp = (email, password) => {
+    signUp({ email, password });
   };
 
   return (
     <div className="container">
       <h1>Expensave</h1>
       <div className="card">
-        <h3>Log In</h3>
+        <h3>Sign Up</h3>
         <div className="card-fields">
           <OAuth />
           <div className="card-right">
-            <Form type="Log In" submit={handleLogIn} />
+            <Form type="Sign Up" submit={handleSignUp} />
             {errorMessage ? (
               <div className="error">
                 <FontAwesomeIcon
@@ -38,9 +38,9 @@ const Login = () => {
               ''
             )}
             <div className="redirect">
-              <p>Don't have an account?</p>&nbsp;
+              <p>Already have an account?</p>&nbsp;
               <span className="accent">
-                <Link to="/signup">Sign Up</Link>
+                <Link to="/login">Log In</Link>
               </span>
             </div>
           </div>
@@ -50,4 +50,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
