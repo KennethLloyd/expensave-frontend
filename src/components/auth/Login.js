@@ -1,7 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import {
+  faExclamationCircle,
+  faEye,
+  faEyeSlash,
+} from '@fortawesome/free-solid-svg-icons';
 import './Login.scss';
 import { GlobalContext } from '../../context/GlobalState';
 import { UserContext } from '../../context/UserState';
@@ -9,9 +13,21 @@ import { UserContext } from '../../context/UserState';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordType, setPasswordType] = useState('password');
+  const [eyeIcon, setEyeIcon] = useState(faEyeSlash);
 
   const { logIn } = useContext(UserContext);
   const { errorMessage } = useContext(GlobalContext);
+
+  const togglePasswordVisibility = () => {
+    if (passwordType === 'password') {
+      setPasswordType('text');
+      setEyeIcon(faEye);
+    } else {
+      setPasswordType('password');
+      setEyeIcon(faEyeSlash);
+    }
+  };
 
   const handleLogIn = () => {
     logIn({ email, password });
@@ -43,15 +59,22 @@ const Login = () => {
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
-            ></input>
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            ></input>
+            />
+            <div className="password-field">
+              <input
+                type={passwordType}
+                placeholder="Password"
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
+              <FontAwesomeIcon
+                icon={eyeIcon}
+                className="eye-icon"
+                onClick={() => togglePasswordVisibility()}
+              />
+            </div>
             <p className="accent forgot">Forgot Password</p>
             <button onClick={handleLogIn}>Log In</button>
             {errorMessage ? (
