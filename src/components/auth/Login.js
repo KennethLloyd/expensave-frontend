@@ -17,7 +17,7 @@ const Login = () => {
   const [eyeIcon, setEyeIcon] = useState(faEyeSlash);
 
   const { logIn } = useContext(UserContext);
-  const { errorMessage } = useContext(GlobalContext);
+  const { errorMessage, setError, clearError } = useContext(GlobalContext);
 
   const togglePasswordVisibility = () => {
     if (passwordType === 'password') {
@@ -29,8 +29,29 @@ const Login = () => {
     }
   };
 
+  const validateEmail = (inputValue) => {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputValue)) {
+      return;
+    }
+    throw 'Invalid email';
+  };
+
+  const validatePassword = (inputValue) => {
+    if (inputValue.trim().length >= 8) {
+      return;
+    }
+    throw 'Password must be at least 8 characters';
+  };
+
   const handleLogIn = () => {
-    logIn({ email, password });
+    try {
+      validateEmail(email);
+      validatePassword(password);
+
+      logIn({ email, password });
+    } catch (e) {
+      setError(e);
+    }
   };
 
   return (

@@ -2,7 +2,7 @@ import React, { useReducer, createContext, useContext } from 'react';
 import userReducer from '../reducers/userReducer';
 import api from '../apis/api';
 import { GlobalContext } from './GlobalState';
-// import history from '../history';
+import history from '../history';
 
 // Initial state
 const initialState = {
@@ -35,11 +35,11 @@ export const UserProvider = ({ children }) => {
 
       clearError();
 
-      //   history.push('/');
+      history.push('/');
     } catch (e) {
       finishLoading();
       setError(e.response.data.error);
-      //   history.push('/login');
+      history.push('/login');
     }
   };
 
