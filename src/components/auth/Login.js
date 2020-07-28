@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import './Login.scss';
+import { UserContext } from '../../context/UserState';
 
 const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const { logIn } = useContext(UserContext);
+
+  const handleLogIn = () => {
+    logIn({ email, password });
+  };
+
   return (
     <div className="container">
       <h1>Expensave</h1>
@@ -23,10 +33,24 @@ const Login = () => {
           </div>
           <div className="card-right">
             <h5>Using your own Expensave account</h5>
-            <input type="text" placeholder="Email Address"></input>
-            <input type="password" placeholder="Password"></input>
+            <input
+              type="text"
+              placeholder="Email Address"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            ></input>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            ></input>
             <p className="accent forgot">Forgot Password</p>
-            <button>Log In</button>
+            <button onClick={handleLogIn}>Log In</button>
             <div className="register">
               <p>Don't have an account?</p>&nbsp;
               <span className="accent">Register</span>

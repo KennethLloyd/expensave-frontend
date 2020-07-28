@@ -1,4 +1,4 @@
-import React, { useReducer, createContext } from 'react';
+import React, { useReducer, createContext, useContext } from 'react';
 import userReducer from '../reducers/userReducer';
 import api from '../apis/api';
 import { GlobalContext } from './GlobalState';
@@ -29,7 +29,7 @@ export const UserProvider = ({ children }) => {
       finishLoading();
 
       dispatch({
-        type: LOG_IN,
+        type: 'LOG_IN',
         payload: response.data.user,
       });
 
