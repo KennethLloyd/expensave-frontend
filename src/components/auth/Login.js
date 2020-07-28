@@ -1,12 +1,12 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import {
   faExclamationCircle,
   faEye,
   faEyeSlash,
 } from '@fortawesome/free-solid-svg-icons';
+import OAuth from './OAuth';
 import './Auth.scss';
 import { GlobalContext } from '../../context/GlobalState';
 import { UserContext } from '../../context/UserState';
@@ -61,17 +61,7 @@ const Login = () => {
       <div className="card">
         <h3>Log In</h3>
         <div className="card-fields">
-          <div className="card-left">
-            <h5>Via social networking accounts</h5>
-            <button className="google-btn">
-              <FontAwesomeIcon icon={faGoogle} className="brand-icon" />
-              Connect with Google
-            </button>
-            <button className="fb-btn">
-              <FontAwesomeIcon icon={faFacebook} className="brand-icon" />
-              Connect with Facebook
-            </button>
-          </div>
+          <OAuth />
           <div className="card-right">
             <h5>Using Expensave account</h5>
             <input
