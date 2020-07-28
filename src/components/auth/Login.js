@@ -28,7 +28,7 @@ const Login = () => {
             <p className="accent forgot">Forgot Password</p>
             <button>Log In</button>
             <div className="register">
-              <p>Don't have an account?</p>
+              <p>Don't have an account?</p>&nbsp;
               <span className="accent">Register</span>
             </div>
           </div>
