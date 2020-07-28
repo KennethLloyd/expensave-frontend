@@ -1,58 +1,19 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faExclamationCircle,
-  faEye,
-  faEyeSlash,
-} from '@fortawesome/free-solid-svg-icons';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import OAuth from './OAuth';
+import Form from './Form';
 import './Auth.scss';
 import { GlobalContext } from '../../context/GlobalState';
 import { UserContext } from '../../context/UserState';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordType, setPasswordType] = useState('password');
-  const [eyeIcon, setEyeIcon] = useState(faEyeSlash);
-
   const { logIn } = useContext(UserContext);
-  const { errorMessage, setError } = useContext(GlobalContext);
+  const { errorMessage } = useContext(GlobalContext);
 
-  const togglePasswordVisibility = () => {
-    if (passwordType === 'password') {
-      setPasswordType('text');
-      setEyeIcon(faEye);
-    } else {
-      setPasswordType('password');
-      setEyeIcon(faEyeSlash);
-    }
-  };
-
-  const validateEmail = (inputValue) => {
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputValue)) {
-      return;
-    }
-    throw 'Invalid email';
-  };
-
-  const validatePassword = (inputValue) => {
-    if (inputValue.trim().length >= 8) {
-      return;
-    }
-    throw 'Password must be at least 8 characters';
-  };
-
-  const handleLogIn = () => {
-    try {
-      validateEmail(email);
-      validatePassword(password);
-
-      logIn({ email, password });
-    } catch (e) {
-      setError(e);
-    }
+  const handleLogIn = (email, password) => {
+    logIn({ email, password });
   };
 
   return (
@@ -63,32 +24,7 @@ const Login = () => {
         <div className="card-fields">
           <OAuth />
           <div className="card-right">
-            <h5>Using Expensave account</h5>
-            <input
-              type="text"
-              placeholder="Email Address"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-            <div className="password-field">
-              <input
-                type={passwordType}
-                placeholder="Password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
-              <FontAwesomeIcon
-                icon={eyeIcon}
-                className="eye-icon"
-                onClick={() => togglePasswordVisibility()}
-              />
-            </div>
-            <p className="accent forgot">Forgot Password</p>
-            <button onClick={handleLogIn}>Log In</button>
+            <Form type="Log In" submit={handleLogIn} />
             {errorMessage ? (
               <div className="error">
                 <FontAwesomeIcon

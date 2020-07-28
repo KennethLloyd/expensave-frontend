@@ -1,21 +1,15 @@
 export default (state, action) => {
   switch (action.type) {
     case 'LOG_IN':
+    case 'SIGN_UP':
       return {
         ...state,
         user: action.payload,
       };
-    case 'SIGN_UP':
-      return {
-        ...state,
-        info: action.payload.user,
-        token: action.payload.token,
-      };
     case 'LOG_OUT':
       return {
         ...state,
-        info: {},
-        token: null,
+        user: null,
       };
 
     default:

@@ -43,11 +43,35 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const signUp = async (userInfo) => {
+    try {
+      startLoading();
+
+      const response = await api.post('/users', userInfo);
+
+      finishLoading();
+
+      dispatch({
+        type: 'SIGN_UP',
+        payload: response.data.user,
+      });
+
+      clearError();
+
+      history.push('/');
+    } catch (e) {
+      finishLoading();
+      setError(e.response.data.error);
+      history.push('/signup');
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
         user: state.user,
         logIn,
+        signUp,
       }}
     >
       {children}
