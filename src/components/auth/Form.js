@@ -40,7 +40,7 @@ const Form = ({ type, submit }) => {
       validateEmail(email);
       validatePassword(password);
 
-      submit({ email, password });
+      submit(email, password);
     } catch (e) {
       setError(e);
     }

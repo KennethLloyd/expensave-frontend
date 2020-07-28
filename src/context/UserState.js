@@ -15,9 +15,13 @@ export const UserContext = createContext();
 // Provider component
 export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, initialState);
-  const { startLoading, finishLoading, setError, clearError } = useContext(
-    GlobalContext,
-  );
+  const {
+    startLoading,
+    finishLoading,
+    setToken,
+    setError,
+    clearError,
+  } = useContext(GlobalContext);
 
   // Actions
   const logIn = async (userInfo) => {
@@ -32,6 +36,8 @@ export const UserProvider = ({ children }) => {
         type: 'LOG_IN',
         payload: response.data.user,
       });
+
+      setToken(response.data.token);
 
       clearError();
 
@@ -55,6 +61,8 @@ export const UserProvider = ({ children }) => {
         type: 'SIGN_UP',
         payload: response.data.user,
       });
+
+      setToken(response.data.token);
 
       clearError();
 
