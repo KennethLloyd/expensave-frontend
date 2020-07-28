@@ -3,10 +3,11 @@ import { Router, Switch } from 'react-router-dom';
 import { GlobalProvider } from '../context/GlobalState';
 import AuthenticatedRoute from './AuthenticatedRoute';
 import UnauthenticatedRoute from './UnauthenticatedRoute';
-import Login from './auth/Login';
 import Dashboard from './dashboard/Dashboard';
-import './App.scss';
+import Login from './auth/Login';
+import SignUp from './auth/SignUp';
 import history from '../history.js';
+import './App.scss';
 
 const App = () => {
   return (
@@ -15,7 +16,7 @@ const App = () => {
         <Switch>
           <AuthenticatedRoute path="/" exact component={Dashboard} />
           <UnauthenticatedRoute path="/login" exact component={Login} />
-          {/* <UnauthenticatedRoute path="/signup" exact component={UserSignUp} /> */}
+          <UnauthenticatedRoute path="/signup" exact component={SignUp} />
         </Switch>
       </Router>
     </GlobalProvider>

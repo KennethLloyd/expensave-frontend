@@ -11,7 +11,7 @@ import './Auth.scss';
 import { GlobalContext } from '../../context/GlobalState';
 import { UserContext } from '../../context/UserState';
 
-const Login = () => {
+const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordType, setPasswordType] = useState('password');
@@ -44,7 +44,7 @@ const Login = () => {
     throw 'Password must be at least 8 characters';
   };
 
-  const handleLogIn = () => {
+  const handleSignUp = () => {
     try {
       validateEmail(email);
       validatePassword(password);
@@ -59,7 +59,7 @@ const Login = () => {
     <div className="container">
       <h1>Expensave</h1>
       <div className="card">
-        <h3>Log In</h3>
+        <h3>Sign Up</h3>
         <div className="card-fields">
           <div className="card-left">
             <h5>Via social networking accounts</h5>
@@ -97,8 +97,7 @@ const Login = () => {
                 onClick={() => togglePasswordVisibility()}
               />
             </div>
-            <p className="accent forgot">Forgot Password</p>
-            <button onClick={handleLogIn}>Log In</button>
+            <button onClick={handleSignUp}>Sign Up</button>
             {errorMessage ? (
               <div className="error">
                 <FontAwesomeIcon
@@ -112,9 +111,9 @@ const Login = () => {
               ''
             )}
             <div className="redirect">
-              <p>Don't have an account?</p>&nbsp;
+              <p>Already have an account?</p>&nbsp;
               <span className="accent">
-                <Link to="/signup">Sign Up</Link>
+                <Link to="/login">Log In</Link>
               </span>
             </div>
           </div>
@@ -124,4 +123,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;

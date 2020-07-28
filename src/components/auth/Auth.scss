@@ -160,10 +160,14 @@ html {
           }
         }
 
-        .register {
+        .redirect {
           display: flex;
           margin-top: 20px;
-          color: $dark-color;
+
+          a {
+            text-decoration: none;
+            color: $accent-color;
+          }
         }
       }
     }
@@ -189,7 +193,7 @@ html {
         }
 
         .card-right {
-          width: 95%;
+          width: 100%;
           margin-top: 30px;
           margin-bottom: 20px;
 
