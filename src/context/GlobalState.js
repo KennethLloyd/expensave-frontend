@@ -3,7 +3,7 @@ import globalReducer from '../reducers/globalReducer';
 
 // Initial state
 const initialState = {
-  token: null,
+  token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
   isLoading: false,
   errorMessage: null,
 };
@@ -21,6 +21,8 @@ export const GlobalProvider = ({ children }) => {
       type: 'SET_TOKEN',
       payload: token,
     });
+
+    localStorage.setItem('token', token);
   };
 
   const clearToken = () => {
