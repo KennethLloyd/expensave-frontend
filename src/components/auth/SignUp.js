@@ -12,8 +12,8 @@ const SignUp = () => {
   const { signUp } = useContext(UserContext);
   const { errorMessage } = useContext(GlobalContext);
 
-  const handleSignUp = (email, password) => {
-    signUp({ email, password });
+  const handleSignUp = (userDetails) => {
+    signUp(userDetails);
   };
 
   return (

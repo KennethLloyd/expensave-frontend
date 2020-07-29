@@ -42,10 +42,25 @@ const Form = ({ type, submit }) => {
 
   const validate = () => {
     try {
+      const userDetails = {};
+
+      if (type === 'Sign Up') {
+        // eslint-disable-next-line no-throw-literal
+        if (firstName === '') throw 'First name is required';
+        // eslint-disable-next-line no-throw-literal
+        if (lastName === '') throw 'Last name is required';
+
+        userDetails.firstName = firstName;
+        userDetails.lastName = lastName;
+      }
+
       validateEmail(email);
       validatePassword(password);
 
-      submit(email, password);
+      userDetails.email = email;
+      userDetails.password = password;
+
+      submit(userDetails);
     } catch (e) {
       setError(e);
     }
