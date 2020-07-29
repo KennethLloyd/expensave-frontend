@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
-import OAuth from './OAuth';
+import SocialLogin from './SocialLogin';
 import Form from './Form';
 import './Auth.scss';
 import { GlobalContext } from '../../context/GlobalState';
@@ -12,8 +12,8 @@ const SignUp = () => {
   const { signUp } = useContext(UserContext);
   const { errorMessage } = useContext(GlobalContext);
 
-  const handleSignUp = (email, password) => {
-    signUp({ email, password });
+  const handleSignUp = (userDetails) => {
+    signUp(userDetails);
   };
 
   return (
@@ -22,7 +22,7 @@ const SignUp = () => {
       <div className="card">
         <h3>Sign Up</h3>
         <div className="card-fields">
-          <OAuth />
+          <SocialLogin />
           <div className="card-right">
             <Form type="Sign Up" submit={handleSignUp} />
             {errorMessage ? (

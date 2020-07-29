@@ -49,6 +49,31 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const logInWithGoogle = async (googleToken) => {
+    try {
+      startLoading();
+
+      const response = await api.post('/users/logIn/google', { googleToken });
+
+      finishLoading();
+
+      dispatch({
+        type: 'LOG_IN',
+        payload: response.data.user,
+      });
+
+      setToken(response.data.token);
+
+      clearError();
+
+      history.push('/');
+    } catch (e) {
+      finishLoading();
+      setError(e.response.data.error);
+      history.push('/login');
+    }
+  };
+
   const signUp = async (userInfo) => {
     try {
       startLoading();
@@ -79,6 +104,7 @@ export const UserProvider = ({ children }) => {
       value={{
         user: state.user,
         logIn,
+        logInWithGoogle,
         signUp,
       }}
     >
