@@ -1,15 +1,13 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+import GoogleSignIn from './GoogleSignIn';
 
-const OAuth = () => {
+const SocialLogin = () => {
   return (
     <div className="card-left">
       <h5>Via social networking accounts</h5>
-      <button className="google-btn">
-        <FontAwesomeIcon icon={faGoogle} className="brand-icon" />
-        Connect with Google
-      </button>
+      <GoogleSignIn />
       <button className="fb-btn">
         <FontAwesomeIcon icon={faFacebook} className="brand-icon" />
         Connect with Facebook
@@ -18,4 +16,4 @@ const OAuth = () => {
   );
 };
 
-export default OAuth;
+export default SocialLogin;

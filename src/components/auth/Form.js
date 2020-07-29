@@ -22,9 +22,11 @@ const Form = ({ type, submit }) => {
   };
 
   const validateEmail = (inputValue) => {
+    // eslint-disable-next-line no-useless-escape
     if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputValue)) {
       return;
     }
+    // eslint-disable-next-line no-throw-literal
     throw 'Invalid email';
   };
 
@@ -32,6 +34,7 @@ const Form = ({ type, submit }) => {
     if (inputValue.trim().length >= 8) {
       return;
     }
+    // eslint-disable-next-line no-throw-literal
     throw 'Password must be at least 8 characters';
   };
 
