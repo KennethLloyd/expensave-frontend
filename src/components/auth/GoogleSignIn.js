@@ -1,23 +1,28 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { UserContext } from '../../context/UserState';
 
 const GoogleSignIn = () => {
-  let auth = null;
-  let googleUser = null;
-  let idToken = null;
+  const { logInWithGoogle } = useContext(UserContext);
   const API_KEY = process.env.REACT_APP_GAPI;
 
-  const onAuthChange = () => {
-    googleUser = auth.currentUser.get();
+  let auth = useRef(null);
+  let googleUser = null;
+  let idToken = null;
+
+  const onAuthChange = async () => {
+    googleUser = auth.current.currentUser.get();
     idToken = googleUser.getAuthResponse().id_token;
-    console.log(idToken);
+
+    await logInWithGoogle(idToken);
   };
 
   const onSignInClick = () => {
-    auth.signIn();
+    auth.current.signIn();
   };
 
+  //initialize google
   useEffect(() => {
     window.gapi.load('client:auth2', async () => {
       await window.gapi.client.init({
@@ -25,8 +30,8 @@ const GoogleSignIn = () => {
         scope: 'email',
       });
 
-      auth = window.gapi.auth2.getAuthInstance();
-      auth.isSignedIn.listen(onAuthChange);
+      auth.current = window.gapi.auth2.getAuthInstance();
+      auth.current.isSignedIn.listen(onAuthChange);
     });
   }, []);
 
