@@ -97,10 +97,14 @@ html {
         align-items: center;
         width: 50%;
 
+        h5 {
+          margin-bottom: 10px;
+        }
+
         input {
           width: 300px;
           height: 61px;
-          margin-top: 20px;
+          margin-top: 10px;
           font-size: 20px;
           padding: 10px;
           border: 1px solid $dark-color;
@@ -115,7 +119,7 @@ html {
 
         .password-field {
           position: relative;
-          margin-top: 20px;
+          margin-top: 10px;
           width: 300px;
           height: 61px;
 

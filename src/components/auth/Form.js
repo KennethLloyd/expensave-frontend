@@ -6,6 +6,8 @@ import { GlobalContext } from '../../context/GlobalState';
 const Form = ({ type, submit }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [passwordType, setPasswordType] = useState('password');
   const [eyeIcon, setEyeIcon] = useState(faEyeSlash);
 
@@ -52,6 +54,28 @@ const Form = ({ type, submit }) => {
   return (
     <>
       <h5>Using Expensave account</h5>
+      {type === 'Sign Up' ? (
+        <>
+          <input
+            type="text"
+            placeholder="First Name"
+            value={firstName}
+            onChange={(e) => {
+              setFirstName(e.target.value);
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(e) => {
+              setLastName(e.target.value);
+            }}
+          />
+        </>
+      ) : (
+        ''
+      )}
       <input
         type="text"
         placeholder="Email Address"
@@ -75,7 +99,11 @@ const Form = ({ type, submit }) => {
           onClick={() => togglePasswordVisibility()}
         />
       </div>
-      <p className="accent forgot">Forgot Password</p>
+      {type === 'Log In' ? (
+        <p className="accent forgot">Forgot Password</p>
+      ) : (
+        ''
+      )}
       <button onClick={validate}>{type}</button>
     </>
   );
