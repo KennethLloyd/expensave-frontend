@@ -13,7 +13,7 @@ const FacebookSignIn = () => {
       appId={process.env.REACT_APP_FB_APP_ID}
       callback={responseFacebook}
       render={(renderProps) => (
-        <button className="fb-btn">
+        <button className="fb-btn" onClick={renderProps.onClick}>
           <FontAwesomeIcon icon={faFacebook} className="brand-icon" />
           Connect with Facebook
         </button>
