@@ -11,7 +11,6 @@ const FacebookSignIn = () => {
   return (
     <FacebookLogin
       appId={process.env.REACT_APP_FB_APP_ID}
-      autoLoad
       callback={responseFacebook}
       render={(renderProps) => (
         <button className="fb-btn">
