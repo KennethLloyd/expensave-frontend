@@ -1,45 +1,27 @@
-import React, { useEffect, useRef, useContext } from 'react';
+import React, { useContext } from 'react';
+import { GoogleLogin } from 'react-google-login';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { UserContext } from '../../context/UserState';
 
 const GoogleSignIn = () => {
   const { logInWithGoogle } = useContext(UserContext);
-  const API_KEY = process.env.REACT_APP_GAPI;
 
-  let auth = useRef(null);
-  let googleUser = null;
-  let idToken = null;
-
-  const onAuthChange = async () => {
-    googleUser = auth.current.currentUser.get();
-    idToken = googleUser.getAuthResponse().id_token;
-
-    await logInWithGoogle(idToken);
+  const responseGoogleSuccess = (response) => {
+    logInWithGoogle(response.tokenId);
   };
-
-  const onSignInClick = () => {
-    auth.current.signIn();
-  };
-
-  //initialize google
-  useEffect(() => {
-    window.gapi.load('client:auth2', async () => {
-      await window.gapi.client.init({
-        clientId: `${API_KEY}`,
-        scope: 'email',
-      });
-
-      auth.current = window.gapi.auth2.getAuthInstance();
-      auth.current.isSignedIn.listen(onAuthChange);
-    });
-  }, []);
 
   return (
-    <button className="google-btn" onClick={onSignInClick}>
-      <FontAwesomeIcon icon={faGoogle} className="brand-icon" />
-      Connect with Google
-    </button>
+    <GoogleLogin
+      clientId={process.env.REACT_APP_GAPI}
+      onSuccess={responseGoogleSuccess}
+      render={(renderProps) => (
+        <button className="google-btn" onClick={renderProps.onClick}>
+          <FontAwesomeIcon icon={faGoogle} className="brand-icon" />
+          Connect with Google
+        </button>
+      )}
+    />
   );
 };
 
