@@ -69,57 +69,64 @@ const Form = ({ type, submit }) => {
   return (
     <>
       <h5>Using Expensave account</h5>
-      {type === 'Sign Up' ? (
-        <>
-          <input
-            type="text"
-            placeholder="First Name"
-            value={firstName}
-            onChange={(e) => {
-              setFirstName(e.target.value);
-            }}
-          />
-          <input
-            type="text"
-            placeholder="Last Name"
-            value={lastName}
-            onChange={(e) => {
-              setLastName(e.target.value);
-            }}
-          />
-        </>
-      ) : (
-        ''
-      )}
-      <input
-        type="text"
-        placeholder="Email Address"
-        value={email}
-        onChange={(e) => {
-          setEmail(e.target.value);
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
         }}
-      />
-      <div className="password-field">
+        className="auth-form"
+      >
+        {type === 'Sign Up' ? (
+          <>
+            <input
+              type="text"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => {
+                setFirstName(e.target.value);
+              }}
+            />
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => {
+                setLastName(e.target.value);
+              }}
+            />
+          </>
+        ) : (
+          ''
+        )}
         <input
-          type={passwordType}
-          placeholder="Password"
-          value={password}
+          type="text"
+          placeholder="Email Address"
+          value={email}
           onChange={(e) => {
-            setPassword(e.target.value);
+            setEmail(e.target.value);
           }}
         />
-        <FontAwesomeIcon
-          icon={eyeIcon}
-          className="eye-icon"
-          onClick={() => togglePasswordVisibility()}
-        />
-      </div>
-      {type === 'Log In' ? (
-        <p className="accent forgot">Forgot Password</p>
-      ) : (
-        ''
-      )}
-      <button onClick={validate}>{type}</button>
+        <div className="password-field">
+          <input
+            type={passwordType}
+            placeholder="Password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <FontAwesomeIcon
+            icon={eyeIcon}
+            className="eye-icon"
+            onClick={() => togglePasswordVisibility()}
+          />
+        </div>
+        {type === 'Log In' ? (
+          <p className="accent forgot">Forgot Password</p>
+        ) : (
+          ''
+        )}
+        <button onClick={validate}>{type}</button>
+      </form>
     </>
   );
 };
