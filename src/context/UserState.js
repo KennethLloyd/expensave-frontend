@@ -74,6 +74,36 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const logInWithFacebook = async (fbToken, firstName, lastName, email) => {
+    try {
+      startLoading();
+
+      const response = await api.post('/users/logIn/fb', {
+        fbToken,
+        firstName,
+        lastName,
+        email,
+      });
+
+      finishLoading();
+
+      dispatch({
+        type: 'LOG_IN',
+        payload: response.data.user,
+      });
+
+      setToken(response.data.token);
+
+      clearError();
+
+      history.push('/');
+    } catch (e) {
+      finishLoading();
+      setError(e.response.data.error);
+      history.push('/login');
+    }
+  };
+
   const signUp = async (userInfo) => {
     try {
       startLoading();
@@ -105,6 +135,7 @@ export const UserProvider = ({ children }) => {
         user: state.user,
         logIn,
         logInWithGoogle,
+        logInWithFacebook,
         signUp,
       }}
     >
