@@ -16,6 +16,7 @@ export const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, initialState);
   const {
+    token,
     startLoading,
     finishLoading,
     setToken,
@@ -129,6 +130,33 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const logOut = async () => {
+    try {
+      startLoading();
+
+      await api.post('/users/logout', null, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      finishLoading();
+
+      dispatch({
+        type: 'LOG_OUT',
+      });
+
+      setToken(null);
+      localStorage.clear();
+
+      clearError();
+
+      history.push('/login');
+    } catch (e) {
+      finishLoading();
+      setError(e.response.data.error);
+      history.push('/');
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -137,6 +165,7 @@ export const UserProvider = ({ children }) => {
         logInWithGoogle,
         logInWithFacebook,
         signUp,
+        logOut,
       }}
     >
       {children}
