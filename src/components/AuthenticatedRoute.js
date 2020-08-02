@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalState';
+import { UserProvider } from '../context/UserState';
 
 const AuthenticatedRoute = ({ children, ...rest }) => {
   const { token } = useContext(GlobalContext);
@@ -8,9 +9,11 @@ const AuthenticatedRoute = ({ children, ...rest }) => {
   const isAuthenticated = token ? true : false;
 
   return (
-    <Route {...rest}>
-      {isAuthenticated ? children : <Redirect to={'/login'} />}
-    </Route>
+    <UserProvider>
+      <Route {...rest}>
+        {isAuthenticated ? children : <Redirect to={'/login'} />}
+      </Route>
+    </UserProvider>
   );
 };
 
