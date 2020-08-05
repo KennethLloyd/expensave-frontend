@@ -4,7 +4,7 @@ import FacebookSignIn from './FacebookSignIn';
 
 const SocialLogin = () => {
   return (
-    <div className="card-left">
+    <div className="auth-card-left">
       <h5>Via social networking accounts</h5>
       <GoogleSignIn />
       <FacebookSignIn />

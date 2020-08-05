@@ -17,13 +17,13 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
+    <div className="auth-container">
       <h1>Expensave</h1>
-      <div className="card">
+      <div className="auth-card">
         <h3>Log In</h3>
-        <div className="card-fields">
+        <div className="auth-card-fields">
           <SocialLogin />
-          <div className="card-right">
+          <div className="auth-card-right">
             <Form type="Log In" submit={handleLogIn} />
             {errorMessage ? (
               <div className="error">

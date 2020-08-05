@@ -15,15 +15,15 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="container">
+    <div className="reset-container">
       <h1>Expensave</h1>
-      <div className="card">
+      <div className="reset-card">
         <h3>Forgot Password</h3>
         <form
           onSubmit={(e) => {
             e.preventDefault();
           }}
-          className="auth-form"
+          className="reset-form"
         >
           <input
             type="text"

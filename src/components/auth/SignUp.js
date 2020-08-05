@@ -17,13 +17,13 @@ const SignUp = () => {
   };
 
   return (
-    <div className="container">
+    <div className="auth-container">
       <h1>Expensave</h1>
-      <div className="card">
+      <div className="auth-card">
         <h3>Sign Up</h3>
-        <div className="card-fields">
+        <div className="auth-card-fields">
           <SocialLogin />
-          <div className="card-right">
+          <div className="auth-card-right">
             <Form type="Sign Up" submit={handleSignUp} />
             {errorMessage ? (
               <div className="error">
