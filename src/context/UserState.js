@@ -70,8 +70,7 @@ export const UserProvider = ({ children }) => {
       history.push('/');
     } catch (e) {
       finishLoading();
-      //setAlert(e.response.data.error);
-      history.push('/login');
+      setAlert('error', e.response.data.error, 'Social');
     }
   };
 
@@ -100,8 +99,7 @@ export const UserProvider = ({ children }) => {
       history.push('/');
     } catch (e) {
       finishLoading();
-      //setAlert(e.response.data.error);
-      history.push('/login');
+      setAlert('error', e.response.data.error, 'Social');
     }
   };
 

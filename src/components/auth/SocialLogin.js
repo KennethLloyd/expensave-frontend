@@ -1,4 +1,5 @@
 import React from 'react';
+import Alert from '../Alert';
 import GoogleSignIn from './GoogleSignIn';
 import FacebookSignIn from './FacebookSignIn';
 
@@ -8,6 +9,7 @@ const SocialLogin = () => {
       <h5>Via social networking accounts</h5>
       <GoogleSignIn />
       <FacebookSignIn />
+      <Alert location="Social" />
     </div>
   );
 };
