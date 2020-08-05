@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { GlobalContext } from '../../context/GlobalState';
@@ -11,7 +12,7 @@ const Form = ({ type, submit }) => {
   const [passwordType, setPasswordType] = useState('password');
   const [eyeIcon, setEyeIcon] = useState(faEyeSlash);
 
-  const { setError } = useContext(GlobalContext);
+  const { setAlert } = useContext(GlobalContext);
 
   const togglePasswordVisibility = () => {
     if (passwordType === 'password') {
@@ -62,7 +63,7 @@ const Form = ({ type, submit }) => {
 
       submit(userDetails);
     } catch (e) {
-      setError(e);
+      setAlert('error', e, type);
     }
   };
 
@@ -98,7 +99,7 @@ const Form = ({ type, submit }) => {
           ''
         )}
         <input
-          type="text"
+          type="email"
           placeholder="Email Address"
           value={email}
           onChange={(e) => {
@@ -121,7 +122,9 @@ const Form = ({ type, submit }) => {
           />
         </div>
         {type === 'Log In' ? (
-          <p className="accent forgot">Forgot Password</p>
+          <p className="accent forgot">
+            <Link to="/forgot-password">Forgot Password</Link>
+          </p>
         ) : (
           ''
         )}

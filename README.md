@@ -8,8 +8,8 @@ Frontend application for Expensave built with ReactJS, Context API, React Hooks,
 $ yarn install
 ```
 
-2. Start the application
+2. Start the application with dev SSL
 
 ```sh
-$ npm start
+$ npm run secure
 ```

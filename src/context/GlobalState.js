@@ -5,7 +5,9 @@ import globalReducer from '../reducers/globalReducer';
 const initialState = {
   token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
   isLoading: false,
-  errorMessage: null,
+  alertMessage: null,
+  alertType: null,
+  alertLocation: null,
 };
 
 // Create Context Object
@@ -43,16 +45,16 @@ export const GlobalProvider = ({ children }) => {
     });
   };
 
-  const setError = (errorMessage) => {
+  const setAlert = (alertType, alertMessage, alertLocation) => {
     dispatch({
-      type: 'SET_ERROR',
-      payload: errorMessage,
+      type: 'SET_ALERT',
+      payload: { alertType, alertMessage, alertLocation },
     });
   };
 
-  const clearError = () => {
+  const clearAlert = () => {
     dispatch({
-      type: 'CLEAR_ERROR',
+      type: 'CLEAR_ALERT',
     });
   };
 
@@ -61,13 +63,15 @@ export const GlobalProvider = ({ children }) => {
       value={{
         token: state.token,
         isLoading: state.isLoading,
-        errorMessage: state.errorMessage,
+        alertType: state.alertType,
+        alertMessage: state.alertMessage,
+        alertLocation: state.alertLocation,
         setToken,
         clearToken,
         startLoading,
         finishLoading,
-        setError,
-        clearError,
+        setAlert,
+        clearAlert,
       }}
     >
       {children}

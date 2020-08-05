@@ -20,8 +20,8 @@ export const UserProvider = ({ children }) => {
     startLoading,
     finishLoading,
     setToken,
-    setError,
-    clearError,
+    setAlert,
+    clearAlert,
   } = useContext(GlobalContext);
 
   // Actions
@@ -40,12 +40,12 @@ export const UserProvider = ({ children }) => {
 
       setToken(response.data.token);
 
-      clearError();
+      clearAlert();
 
       history.push('/');
     } catch (e) {
       finishLoading();
-      setError(e.response.data.error);
+      setAlert('error', e.response.data.error, 'Log In');
       history.push('/login');
     }
   };
@@ -65,13 +65,12 @@ export const UserProvider = ({ children }) => {
 
       setToken(response.data.token);
 
-      clearError();
+      clearAlert();
 
       history.push('/');
     } catch (e) {
       finishLoading();
-      setError(e.response.data.error);
-      history.push('/login');
+      setAlert('error', e.response.data.error, 'Social');
     }
   };
 
@@ -95,13 +94,12 @@ export const UserProvider = ({ children }) => {
 
       setToken(response.data.token);
 
-      clearError();
+      clearAlert();
 
       history.push('/');
     } catch (e) {
       finishLoading();
-      setError(e.response.data.error);
-      history.push('/login');
+      setAlert('error', e.response.data.error, 'Social');
     }
   };
 
@@ -120,12 +118,12 @@ export const UserProvider = ({ children }) => {
 
       setToken(response.data.token);
 
-      clearError();
+      clearAlert();
 
       history.push('/');
     } catch (e) {
       finishLoading();
-      setError(e.response.data.error);
+      setAlert('error', e.response.data.error, 'Sign Up');
       history.push('/signup');
     }
   };
@@ -147,13 +145,42 @@ export const UserProvider = ({ children }) => {
       setToken(null);
       localStorage.clear();
 
-      clearError();
+      clearAlert();
 
       history.push('/login');
     } catch (e) {
       finishLoading();
-      setError(e.response.data.error);
+      //setAlert('error', e.response.data.error, 'Dashboard');
       history.push('/');
+    }
+  };
+
+  const forgotPassword = async (userInfo) => {
+    try {
+      startLoading();
+
+      await api.post('/users/forgot', userInfo);
+
+      finishLoading();
+
+      dispatch({
+        type: 'FORGOT_PASSWORD',
+      });
+
+      clearAlert();
+
+      setAlert(
+        'success',
+        'Success! Kindly check your email',
+        'Forgot Password',
+      );
+
+      setTimeout(() => {
+        history.push('/login');
+      }, 3000);
+    } catch (e) {
+      finishLoading();
+      setAlert('error', e.response.data.error, 'Forgot Password');
     }
   };
 
@@ -166,6 +193,7 @@ export const UserProvider = ({ children }) => {
         logInWithFacebook,
         signUp,
         logOut,
+        forgotPassword,
       }}
     >
       {children}

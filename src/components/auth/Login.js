@@ -1,42 +1,28 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import Alert from '../Alert';
 import SocialLogin from './SocialLogin';
 import Form from './Form';
 import './Auth.scss';
-import { GlobalContext } from '../../context/GlobalState';
 import { UserContext } from '../../context/UserState';
 
 const Login = () => {
   const { logIn } = useContext(UserContext);
-  const { errorMessage } = useContext(GlobalContext);
 
   const handleLogIn = (userDetails) => {
     logIn(userDetails);
   };
 
   return (
-    <div className="container">
+    <div className="auth-container">
       <h1>Expensave</h1>
-      <div className="card">
+      <div className="auth-card">
         <h3>Log In</h3>
-        <div className="card-fields">
+        <div className="auth-card-fields">
           <SocialLogin />
-          <div className="card-right">
+          <div className="auth-card-right">
             <Form type="Log In" submit={handleLogIn} />
-            {errorMessage ? (
-              <div className="error">
-                <FontAwesomeIcon
-                  icon={faExclamationCircle}
-                  className="error-icon"
-                />
-                &nbsp;
-                <p className="error-msg">{errorMessage}</p>
-              </div>
-            ) : (
-              ''
-            )}
+            <Alert location="Log In" />
             <div className="redirect">
               <p>Don't have an account?</p>&nbsp;
               <span className="accent">

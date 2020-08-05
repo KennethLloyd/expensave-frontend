@@ -8,7 +8,7 @@ html {
   );
 }
 
-.container {
+.auth-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -21,7 +21,7 @@ html {
     margin-top: 114px;
   }
 
-  .card {
+  .auth-card {
     display: flex;
     flex-direction: column;
     width: 842px;
@@ -40,7 +40,7 @@ html {
       margin-top: 44px;
     }
 
-    .card-fields {
+    .auth-card-fields {
       display: flex;
       justify-content: center;
       margin-top: 30px;
@@ -52,7 +52,7 @@ html {
         text-align: center;
       }
 
-      .card-left {
+      .auth-card-left {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -92,7 +92,7 @@ html {
         }
       }
 
-      .card-right {
+      .auth-card-right {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -146,7 +146,6 @@ html {
           }
 
           .accent {
-            color: $accent-color;
             cursor: pointer;
           }
 
@@ -154,6 +153,11 @@ html {
             margin-top: 19px;
             margin-left: auto;
             margin-right: 32px;
+
+            a {
+              text-decoration: none;
+              color: $accent-color;
+            }
           }
 
           button {
@@ -186,25 +190,25 @@ html {
   }
 
   @media (max-width: 991px) {
-    .card {
+    .auth-card {
       width: 90%;
     }
   }
 
   @media (max-width: 767px) {
-    .card {
+    .auth-card {
       height: auto;
 
-      .card-fields {
+      .auth-card-fields {
         flex-direction: column;
         align-items: center;
 
-        .card-left {
+        .auth-card-left {
           width: 100%;
           border: none;
         }
 
-        .card-right {
+        .auth-card-right {
           width: 100%;
           margin-top: 30px;
           margin-bottom: 20px;
