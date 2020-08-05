@@ -146,7 +146,6 @@ html {
           }
 
           .accent {
-            color: $accent-color;
             cursor: pointer;
           }
 
@@ -154,6 +153,11 @@ html {
             margin-top: 19px;
             margin-left: auto;
             margin-right: 32px;
+
+            a {
+              text-decoration: none;
+              color: $accent-color;
+            }
           }
 
           button {

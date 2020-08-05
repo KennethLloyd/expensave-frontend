@@ -6,6 +6,7 @@ import UnauthenticatedRoute from './UnauthenticatedRoute';
 import Dashboard from './dashboard/Dashboard';
 import Login from './auth/Login';
 import SignUp from './auth/SignUp';
+import ForgotPassword from './auth/ForgotPassword';
 import history from '../history.js';
 import './App.scss';
 
@@ -17,6 +18,11 @@ const App = () => {
           <AuthenticatedRoute path="/" exact component={Dashboard} />
           <UnauthenticatedRoute path="/login" exact component={Login} />
           <UnauthenticatedRoute path="/signup" exact component={SignUp} />
+          <UnauthenticatedRoute
+            path="/forgot-password"
+            exact
+            component={ForgotPassword}
+          />
         </Switch>
       </Router>
     </GlobalProvider>

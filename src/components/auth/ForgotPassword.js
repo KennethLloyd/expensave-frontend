@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import './ResetPassword.scss';
@@ -7,6 +6,7 @@ import { GlobalContext } from '../../context/GlobalState';
 import { UserContext } from '../../context/UserState';
 
 const ForgotPassword = () => {
+  const [email, setEmail] = useState('');
   const { forgotPassword } = useContext(UserContext);
   const { errorMessage } = useContext(GlobalContext);
 
@@ -47,12 +47,6 @@ const ForgotPassword = () => {
         ) : (
           ''
         )}
-        <div className="redirect">
-          <p>Already have an account?</p>&nbsp;
-          <span className="accent">
-            <Link to="/login">Log In</Link>
-          </span>
-        </div>
       </div>
     </div>
   );
