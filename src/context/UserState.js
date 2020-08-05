@@ -171,11 +171,18 @@ export const UserProvider = ({ children }) => {
 
       clearAlert();
 
-      history.push('/login');
+      setAlert(
+        'success',
+        'Success! Kindly check your email',
+        'Forgot Password',
+      );
+
+      setTimeout(() => {
+        history.push('/login');
+      }, 3000);
     } catch (e) {
       finishLoading();
       setAlert('error', e.response.data.error, 'Forgot Password');
-      history.push('/login');
     }
   };
 
