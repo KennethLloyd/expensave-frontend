@@ -10,7 +10,7 @@ import { UserContext } from '../../context/UserState';
 
 const Login = () => {
   const { logIn } = useContext(UserContext);
-  const { errorMessage, errorLocation } = useContext(GlobalContext);
+  const { alertType, alertMessage, alertLocation } = useContext(GlobalContext);
 
   const handleLogIn = (userDetails) => {
     logIn(userDetails);
@@ -25,14 +25,14 @@ const Login = () => {
           <SocialLogin />
           <div className="auth-card-right">
             <Form type="Log In" submit={handleLogIn} />
-            {errorMessage && errorLocation === 'Log In' ? (
-              <div className="error">
+            {alertMessage && alertLocation === 'Log In' ? (
+              <div className={`${alertType}`}>
                 <FontAwesomeIcon
                   icon={faExclamationCircle}
-                  className="error-icon"
+                  className={`${alertType}-icon`}
                 />
                 &nbsp;
-                <p className="error-msg">{errorMessage}</p>
+                <p className={`${alertType}-msg`}>{alertMessage}</p>
               </div>
             ) : (
               ''

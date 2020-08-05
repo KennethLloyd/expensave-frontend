@@ -8,7 +8,9 @@ import { UserContext } from '../../context/UserState';
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const { forgotPassword } = useContext(UserContext);
-  const { setError, errorMessage, errorLocation } = useContext(GlobalContext);
+  const { setAlert, alertType, alertMessage, alertLocation } = useContext(
+    GlobalContext,
+  );
 
   const handleForgotPassword = (userDetails) => {
     forgotPassword(userDetails);
@@ -33,7 +35,7 @@ const ForgotPassword = () => {
 
       handleForgotPassword(userDetails);
     } catch (e) {
-      setError(e, 'Forgot Password');
+      setAlert('error', e, 'Forgot Password');
     }
   };
 
@@ -58,14 +60,14 @@ const ForgotPassword = () => {
           />
           <button onClick={validate}>Submit</button>
         </form>
-        {errorMessage && errorLocation === 'Forgot Password' ? (
-          <div className="error">
+        {alertMessage && alertLocation === 'Forgot Password' ? (
+          <div className={`${alertType}`}>
             <FontAwesomeIcon
               icon={faExclamationCircle}
-              className="error-icon"
+              className={`${alertType}-icon`}
             />
             &nbsp;
-            <p className="error-msg">{errorMessage}</p>
+            <p className={`${alertType}-msg`}>{alertMessage}</p>
           </div>
         ) : (
           ''

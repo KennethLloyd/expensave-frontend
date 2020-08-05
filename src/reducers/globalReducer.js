@@ -20,17 +20,19 @@ export default (state, action) => {
         ...state,
         isLoading: false,
       };
-    case 'SET_ERROR':
+    case 'SET_ALERT':
       return {
         ...state,
-        errorMessage: action.payload.errorMessage,
-        errorLocation: action.payload.errorLocation,
+        alertType: action.payload.alertType,
+        alertMessage: action.payload.alertMessage,
+        alertLocation: action.payload.alertLocation,
       };
-    case 'CLEAR_ERROR':
+    case 'CLEAR_ALERT':
       return {
         ...state,
-        errorMessage: null,
-        errorLocation: null,
+        alertType: null,
+        alertMessage: null,
+        alertLocation: null,
       };
 
     default:

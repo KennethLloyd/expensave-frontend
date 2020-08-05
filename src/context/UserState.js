@@ -20,8 +20,8 @@ export const UserProvider = ({ children }) => {
     startLoading,
     finishLoading,
     setToken,
-    setError,
-    clearError,
+    setAlert,
+    clearAlert,
   } = useContext(GlobalContext);
 
   // Actions
@@ -40,12 +40,12 @@ export const UserProvider = ({ children }) => {
 
       setToken(response.data.token);
 
-      clearError();
+      clearAlert();
 
       history.push('/');
     } catch (e) {
       finishLoading();
-      setError(e.response.data.error);
+      setAlert('error', e.response.data.error, 'Log In');
       history.push('/login');
     }
   };
@@ -65,12 +65,12 @@ export const UserProvider = ({ children }) => {
 
       setToken(response.data.token);
 
-      clearError();
+      clearAlert();
 
       history.push('/');
     } catch (e) {
       finishLoading();
-      setError(e.response.data.error);
+      //setAlert(e.response.data.error);
       history.push('/login');
     }
   };
@@ -95,12 +95,12 @@ export const UserProvider = ({ children }) => {
 
       setToken(response.data.token);
 
-      clearError();
+      clearAlert();
 
       history.push('/');
     } catch (e) {
       finishLoading();
-      setError(e.response.data.error);
+      //setAlert(e.response.data.error);
       history.push('/login');
     }
   };
@@ -120,12 +120,12 @@ export const UserProvider = ({ children }) => {
 
       setToken(response.data.token);
 
-      clearError();
+      clearAlert();
 
       history.push('/');
     } catch (e) {
       finishLoading();
-      setError(e.response.data.error);
+      setAlert('error', e.response.data.error, 'Sign Up');
       history.push('/signup');
     }
   };
@@ -147,12 +147,12 @@ export const UserProvider = ({ children }) => {
       setToken(null);
       localStorage.clear();
 
-      clearError();
+      clearAlert();
 
       history.push('/login');
     } catch (e) {
       finishLoading();
-      setError(e.response.data.error);
+      //setAlert('error', e.response.data.error, 'Dashboard');
       history.push('/');
     }
   };
@@ -169,12 +169,12 @@ export const UserProvider = ({ children }) => {
         type: 'FORGOT_PASSWORD',
       });
 
-      clearError();
+      clearAlert();
 
       history.push('/login');
     } catch (e) {
       finishLoading();
-      setError(e.response.data.error);
+      setAlert('error', e.response.data.error, 'Forgot Password');
       history.push('/login');
     }
   };

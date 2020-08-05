@@ -12,7 +12,7 @@ const Form = ({ type, submit }) => {
   const [passwordType, setPasswordType] = useState('password');
   const [eyeIcon, setEyeIcon] = useState(faEyeSlash);
 
-  const { setError } = useContext(GlobalContext);
+  const { setAlert } = useContext(GlobalContext);
 
   const togglePasswordVisibility = () => {
     if (passwordType === 'password') {
@@ -63,7 +63,7 @@ const Form = ({ type, submit }) => {
 
       submit(userDetails);
     } catch (e) {
-      setError(e, type);
+      setAlert('error', e, type);
     }
   };
 
