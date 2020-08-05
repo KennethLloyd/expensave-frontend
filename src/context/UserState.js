@@ -157,6 +157,28 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const forgotPassword = async (userInfo) => {
+    try {
+      startLoading();
+
+      await api.post('/users/forgot', userInfo);
+
+      finishLoading();
+
+      dispatch({
+        type: 'FORGOT_PASSWORD',
+      });
+
+      clearError();
+
+      history.push('/login');
+    } catch (e) {
+      finishLoading();
+      setError(e.response.data.error);
+      history.push('/login');
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -166,6 +188,7 @@ export const UserProvider = ({ children }) => {
         logInWithFacebook,
         signUp,
         logOut,
+        forgotPassword,
       }}
     >
       {children}
