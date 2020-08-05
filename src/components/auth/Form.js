@@ -63,7 +63,7 @@ const Form = ({ type, submit }) => {
 
       submit(userDetails);
     } catch (e) {
-      setError(e);
+      setError(e, type);
     }
   };
 

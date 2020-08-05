@@ -8,7 +8,7 @@ import { UserContext } from '../../context/UserState';
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const { forgotPassword } = useContext(UserContext);
-  const { setError, errorMessage } = useContext(GlobalContext);
+  const { setError, errorMessage, errorLocation } = useContext(GlobalContext);
 
   const handleForgotPassword = (userDetails) => {
     forgotPassword(userDetails);
@@ -33,7 +33,7 @@ const ForgotPassword = () => {
 
       handleForgotPassword(userDetails);
     } catch (e) {
-      setError(e);
+      setError(e, 'Forgot Password');
     }
   };
 
@@ -58,7 +58,7 @@ const ForgotPassword = () => {
           />
           <button onClick={validate}>Submit</button>
         </form>
-        {errorMessage ? (
+        {errorMessage && errorLocation === 'Forgot Password' ? (
           <div className="error">
             <FontAwesomeIcon
               icon={faExclamationCircle}

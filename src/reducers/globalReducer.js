@@ -23,12 +23,14 @@ export default (state, action) => {
     case 'SET_ERROR':
       return {
         ...state,
-        errorMessage: action.payload,
+        errorMessage: action.payload.errorMessage,
+        errorLocation: action.payload.errorLocation,
       };
     case 'CLEAR_ERROR':
       return {
         ...state,
         errorMessage: null,
+        errorLocation: null,
       };
 
     default:

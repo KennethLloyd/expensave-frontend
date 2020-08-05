@@ -6,6 +6,7 @@ const initialState = {
   token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
   isLoading: false,
   errorMessage: null,
+  errorLocation: null,
 };
 
 // Create Context Object
@@ -43,10 +44,10 @@ export const GlobalProvider = ({ children }) => {
     });
   };
 
-  const setError = (errorMessage) => {
+  const setError = (errorMessage, errorLocation) => {
     dispatch({
       type: 'SET_ERROR',
-      payload: errorMessage,
+      payload: { errorMessage, errorLocation },
     });
   };
 
@@ -62,6 +63,7 @@ export const GlobalProvider = ({ children }) => {
         token: state.token,
         isLoading: state.isLoading,
         errorMessage: state.errorMessage,
+        errorLocation: state.errorLocation,
         setToken,
         clearToken,
         startLoading,
