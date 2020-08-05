@@ -99,7 +99,7 @@ const Form = ({ type, submit }) => {
           ''
         )}
         <input
-          type="text"
+          type="email"
           placeholder="Email Address"
           value={email}
           onChange={(e) => {

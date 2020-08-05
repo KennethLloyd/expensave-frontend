@@ -8,10 +8,33 @@ import { UserContext } from '../../context/UserState';
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const { forgotPassword } = useContext(UserContext);
-  const { errorMessage } = useContext(GlobalContext);
+  const { setError, errorMessage } = useContext(GlobalContext);
 
   const handleForgotPassword = (userDetails) => {
     forgotPassword(userDetails);
+  };
+
+  const validateEmail = (inputValue) => {
+    // eslint-disable-next-line no-useless-escape
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputValue)) {
+      return;
+    }
+    // eslint-disable-next-line no-throw-literal
+    throw 'Invalid email';
+  };
+
+  const validate = () => {
+    try {
+      const userDetails = {};
+
+      validateEmail(email);
+
+      userDetails.email = email;
+
+      handleForgotPassword(userDetails);
+    } catch (e) {
+      setError(e);
+    }
   };
 
   return (
@@ -26,14 +49,14 @@ const ForgotPassword = () => {
           className="reset-form"
         >
           <input
-            type="text"
+            type="email"
             placeholder="Email Address"
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
             }}
           />
-          <button onClick={handleForgotPassword}>Submit</button>
+          <button onClick={validate}>Submit</button>
         </form>
         {errorMessage ? (
           <div className="error">
