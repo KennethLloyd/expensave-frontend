@@ -1,16 +1,13 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import Alert from '../Alert';
 import SocialLogin from './SocialLogin';
 import Form from './Form';
 import './Auth.scss';
-import { GlobalContext } from '../../context/GlobalState';
 import { UserContext } from '../../context/UserState';
 
 const SignUp = () => {
   const { signUp } = useContext(UserContext);
-  const { alertType, alertMessage, alertLocation } = useContext(GlobalContext);
 
   const handleSignUp = (userDetails) => {
     signUp(userDetails);
@@ -25,18 +22,7 @@ const SignUp = () => {
           <SocialLogin />
           <div className="auth-card-right">
             <Form type="Sign Up" submit={handleSignUp} />
-            {alertMessage && alertLocation === 'Sign Up' ? (
-              <div className={`${alertType}`}>
-                <FontAwesomeIcon
-                  icon={faExclamationCircle}
-                  className={`${alertType}-icon`}
-                />
-                &nbsp;
-                <p className={`${alertType}-msg`}>{alertMessage}</p>
-              </div>
-            ) : (
-              ''
-            )}
+            <Alert location="Sign Up" />
             <div className="redirect">
               <p>Already have an account?</p>&nbsp;
               <span className="accent">

@@ -1,16 +1,13 @@
 import React, { useState, useContext } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import './ResetPassword.scss';
+import Alert from '../Alert';
 import { GlobalContext } from '../../context/GlobalState';
 import { UserContext } from '../../context/UserState';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const { forgotPassword } = useContext(UserContext);
-  const { setAlert, alertType, alertMessage, alertLocation } = useContext(
-    GlobalContext,
-  );
+  const { setAlert } = useContext(GlobalContext);
 
   const handleForgotPassword = (userDetails) => {
     forgotPassword(userDetails);
@@ -60,18 +57,7 @@ const ForgotPassword = () => {
           />
           <button onClick={validate}>Submit</button>
         </form>
-        {alertMessage && alertLocation === 'Forgot Password' ? (
-          <div className={`${alertType}`}>
-            <FontAwesomeIcon
-              icon={faExclamationCircle}
-              className={`${alertType}-icon`}
-            />
-            &nbsp;
-            <p className={`${alertType}-msg`}>{alertMessage}</p>
-          </div>
-        ) : (
-          ''
-        )}
+        <Alert location="Forgot Password" />
       </div>
     </div>
   );
