@@ -4,6 +4,7 @@ import { GlobalProvider } from '../context/GlobalState';
 import AuthenticatedRoute from './AuthenticatedRoute';
 import UnauthenticatedRoute from './UnauthenticatedRoute';
 import Dashboard from './dashboard/Dashboard';
+import Transactions from './transactions/Transactions';
 import Login from './auth/Login';
 import SignUp from './auth/SignUp';
 import ForgotPassword from './auth/ForgotPassword';
@@ -16,7 +17,7 @@ const App = () => {
     <GlobalProvider>
       <Router history={history}>
         <Switch>
-          <AuthenticatedRoute path="/" exact component={Dashboard} />
+          <AuthenticatedRoute path="/" exact component={Transactions} />
           <UnauthenticatedRoute path="/login" exact component={Login} />
           <UnauthenticatedRoute path="/signup" exact component={SignUp} />
           <UnauthenticatedRoute
