@@ -184,7 +184,7 @@ export const UserProvider = ({ children }) => {
     try {
       startLoading();
 
-      await api.post(`/users/reset/${resetToken}`, password);
+      await api.post(`/users/reset/${resetToken}`, { password });
 
       finishLoading();
 
@@ -201,7 +201,7 @@ export const UserProvider = ({ children }) => {
       }, 3000);
     } catch (e) {
       finishLoading();
-      setAlert('error', e.response.data.error, 'Reset Password');
+      setAlert('error', e.response.data.error, 'Change Password');
     }
   };
 
