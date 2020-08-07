@@ -163,10 +163,6 @@ export const UserProvider = ({ children }) => {
 
       finishLoading();
 
-      dispatch({
-        type: 'FORGOT_PASSWORD',
-      });
-
       clearAlert();
 
       setAlert(
@@ -184,6 +180,31 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const changePassword = async (resetToken, password) => {
+    try {
+      startLoading();
+
+      await api.post(`/users/reset/${resetToken}`, password);
+
+      finishLoading();
+
+      clearAlert();
+
+      setAlert(
+        'success',
+        'Password changed successfully! Please login again',
+        'Reset Password',
+      );
+
+      setTimeout(() => {
+        history.push('/login');
+      }, 3000);
+    } catch (e) {
+      finishLoading();
+      setAlert('error', e.response.data.error, 'Reset Password');
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -194,6 +215,7 @@ export const UserProvider = ({ children }) => {
         signUp,
         logOut,
         forgotPassword,
+        changePassword,
       }}
     >
       {children}
