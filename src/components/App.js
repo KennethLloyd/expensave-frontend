@@ -7,6 +7,7 @@ import Dashboard from './dashboard/Dashboard';
 import Login from './auth/Login';
 import SignUp from './auth/SignUp';
 import ForgotPassword from './auth/ForgotPassword';
+import ChangePassword from './auth/ChangePassword';
 import history from '../history.js';
 import './App.scss';
 
@@ -22,6 +23,11 @@ const App = () => {
             path="/forgot-password"
             exact
             component={ForgotPassword}
+          />
+          <UnauthenticatedRoute
+            path="/reset-password/:resetToken"
+            exact
+            component={ChangePassword}
           />
         </Switch>
       </Router>

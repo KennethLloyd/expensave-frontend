@@ -6,7 +6,7 @@ import Alert from '../Alert';
 import { GlobalContext } from '../../context/GlobalState';
 import { UserContext } from '../../context/UserState';
 
-const ChangePassword = () => {
+const ChangePassword = (props) => {
   const [password, setPassword] = useState('');
   const [passwordType, setPasswordType] = useState('password');
   const [eyeIcon, setEyeIcon] = useState(faEyeSlash);
@@ -14,7 +14,7 @@ const ChangePassword = () => {
   const { setAlert } = useContext(GlobalContext);
 
   const handleChangePassword = (password) => {
-    changePassword('', password);
+    changePassword(props.match.params.resetToken, password);
   };
 
   const validatePassword = (inputValue) => {

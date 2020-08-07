@@ -171,9 +171,9 @@ export const UserProvider = ({ children }) => {
         'Forgot Password',
       );
 
-      setTimeout(() => {
-        history.push('/login');
-      }, 3000);
+      await new Promise((r) => setTimeout(r, 3000));
+
+      history.push('/login');
     } catch (e) {
       finishLoading();
       setAlert('error', e.response.data.error, 'Forgot Password');
@@ -193,12 +193,12 @@ export const UserProvider = ({ children }) => {
       setAlert(
         'success',
         'Password changed successfully! Please login again',
-        'Reset Password',
+        'Change Password',
       );
 
-      setTimeout(() => {
-        history.push('/login');
-      }, 3000);
+      await new Promise((r) => setTimeout(r, 3000));
+
+      history.push('/login');
     } catch (e) {
       finishLoading();
       setAlert('error', e.response.data.error, 'Change Password');
