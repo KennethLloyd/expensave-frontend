@@ -1,0 +1,16 @@
+@import '../styles/index.scss';
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $primary-color;
+  padding: 0 60px;
+  height: 88px;
+
+  h3 {
+    font-size: 32px;
+    font-weight: $font-weight-regular;
+    color: $light-color;
+  }
+}
