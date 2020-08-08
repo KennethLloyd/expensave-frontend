@@ -163,10 +163,6 @@ export const UserProvider = ({ children }) => {
 
       finishLoading();
 
-      dispatch({
-        type: 'FORGOT_PASSWORD',
-      });
-
       clearAlert();
 
       setAlert(
@@ -175,12 +171,37 @@ export const UserProvider = ({ children }) => {
         'Forgot Password',
       );
 
-      setTimeout(() => {
-        history.push('/login');
-      }, 3000);
+      await new Promise((r) => setTimeout(r, 3000));
+
+      history.push('/login');
     } catch (e) {
       finishLoading();
       setAlert('error', e.response.data.error, 'Forgot Password');
+    }
+  };
+
+  const changePassword = async (resetToken, password) => {
+    try {
+      startLoading();
+
+      await api.post(`/users/reset/${resetToken}`, { password });
+
+      finishLoading();
+
+      clearAlert();
+
+      setAlert(
+        'success',
+        'Password changed successfully! Please login again',
+        'Change Password',
+      );
+
+      await new Promise((r) => setTimeout(r, 3000));
+
+      history.push('/login');
+    } catch (e) {
+      finishLoading();
+      setAlert('error', e.response.data.error, 'Change Password');
     }
   };
 
@@ -194,6 +215,7 @@ export const UserProvider = ({ children }) => {
         signUp,
         logOut,
         forgotPassword,
+        changePassword,
       }}
     >
       {children}

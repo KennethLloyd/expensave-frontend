@@ -1,0 +1,30 @@
+@import '../../styles/index.scss';
+
+.transaction-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: $light-color;
+  height: 83px;
+  @include BoxShadow(2);
+
+  &-select {
+    background: $white;
+  }
+
+  &-search {
+    background: $white;
+  }
+
+  &-income {
+    display: flex;
+    flex-direction: column;
+    color: $primary-color;
+  }
+
+  &-expenses {
+    display: flex;
+    flex-direction: column;
+    color: $secondary-color;
+  }
+}
