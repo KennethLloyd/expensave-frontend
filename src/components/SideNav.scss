@@ -3,16 +3,34 @@
 aside {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
   height: 100vh;
   width: 113px;
   @include BoxShadow(2);
+  padding: 45px 0;
+
+  .side-menu {
+    display: flex;
+    justify-content: center;
+
+    &-burger-icon {
+      cursor: pointer;
+      color: darken($color: $gray, $amount: 20);
+    }
+  }
 
   nav {
+    margin-top: 30px;
+
     .nav-item {
+      margin-top: 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      color: darken($color: $gray, $amount: 20);
+    }
+
+    p {
+      font-size: 12px;
     }
   }
 }

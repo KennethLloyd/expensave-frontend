@@ -9,23 +9,36 @@ import './SideNav.scss';
 const SideNav = () => {
   return (
     <aside>
-      <button className="burger-menu">
-        <FontAwesomeIcon icon={faBars} className="nav-dashboard-icon" />
-      </button>
+      <div className="side-menu">
+        <FontAwesomeIcon
+          icon={faBars}
+          className="side-menu-burger-icon"
+          size="2x"
+        />
+      </div>
       <nav>
         <div className="nav-item nav-dashboard">
-          <FontAwesomeIcon icon={faChartLine} className="nav-dashboard-icon" />
+          <FontAwesomeIcon
+            icon={faChartLine}
+            className="nav-dashboard-icon"
+            size="2x"
+          />
           <p>Dashboard</p>
         </div>
         <div className="nav-item nav-transactions">
           <FontAwesomeIcon
             icon={faHandshake}
             className="nav-transactions-icon"
+            size="2x"
           />
           <p>Transactions</p>
         </div>
         <div className="nav-item nav-savings">
-          <FontAwesomeIcon icon={faPiggyBank} className="nav-savings-icon" />
+          <FontAwesomeIcon
+            icon={faPiggyBank}
+            className="nav-savings-icon"
+            size="2x"
+          />
           <p>Savings</p>
         </div>
       </nav>
