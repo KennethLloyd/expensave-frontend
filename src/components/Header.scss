@@ -13,4 +13,18 @@ header {
     font-weight: $font-weight-regular;
     color: $light-color;
   }
+
+  .header-right {
+    display: flex;
+
+    .header-total {
+      display: flex;
+      flex-direction: column;
+      color: $white;
+
+      h4 {
+        font-size: 24px;
+      }
+    }
+  }
 }
