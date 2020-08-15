@@ -2,5 +2,6 @@
 
 .transaction-page {
   background: white;
-  height: 100vh;
+  height: 100%;
+  @include BoxShadow(2);
 }

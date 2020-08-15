@@ -4,21 +4,36 @@
   background: white;
   height: 100vh;
   display: grid;
-  grid-template-columns: 113px auto;
+  grid-template-columns: 100px auto;
   grid-template-rows: 88px 83px auto;
+  @media (max-width: 1199px) {
+    grid-template-columns: auto;
+  }
 
   Header {
     grid-column: 2/3;
     grid-row: 1/2;
+
+    @media (max-width: 1199px) {
+      grid-column: 1/2;
+    }
   }
 
-  SideNav {
+  aside {
     grid-column: 1/2;
     grid-row: 1/4;
+
+    @media (max-width: 1199px) {
+      visibility: hidden;
+    }
   }
 
   .transaction-page {
     grid-column: 2/3;
     grid-row: 2/4;
+
+    @media (max-width: 1199px) {
+      grid-column: 1/2;
+    }
   }
 }

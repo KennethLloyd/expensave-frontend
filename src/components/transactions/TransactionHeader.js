@@ -1,27 +1,34 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import './TransactionHeader.scss';
 
 const TransactionHeader = () => {
   return (
     <div className="transaction-header">
-      <button>Prev</button>
-      <h3>August</h3>
-      <button>Next</button>
-      <div className="transaction-header-select">
+      <div className="transaction-header-date-select">
+        <FontAwesomeIcon icon={faChevronLeft} />
+        <h3>August</h3>
+        <FontAwesomeIcon icon={faChevronRight} />
+      </div>
+      <div className="transaction-header-filter-group">
         <select>
           <option value="all">All transactions</option>
           <option value="income">Income</option>
           <option value="expenses">Expenses</option>
         </select>
+        <input placeholder="Search" />
       </div>
-      <input className="transaction-header-search" placeholder="Search" />
-      <div className="transaction-header-income">
-        <p>Total Income</p>
-        <h4>P 54,500.00</h4>
-      </div>
-      <div className="transaction-header-expenses">
-        <p>Total Expenses</p>
-        <h4>P 44,000.00</h4>
+      <div className="transaction-header-total">
+        <div className="transaction-header-total-income">
+          <p>Total Income</p>
+          <h4>P 54,500.00</h4>
+        </div>
+        <div className="transaction-header-total-expenses">
+          <p>Total Expenses</p>
+          <h4>P 44,000.00</h4>
+        </div>
       </div>
     </div>
   );

@@ -7,6 +7,9 @@ header {
   background: $primary-color;
   padding: 0 60px;
   height: 88px;
+  @media (max-width: 767px) {
+    padding: 0 10px;
+  }
 
   h3 {
     font-size: 32px;
@@ -17,13 +20,21 @@ header {
   .header-right {
     display: flex;
 
-    .header-total {
+    &-wallet {
+      align-self: center;
+    }
+
+    &-total {
       display: flex;
       flex-direction: column;
       color: $white;
 
+      p {
+        font-size: 14px;
+      }
+
       h4 {
-        font-size: 24px;
+        font-size: 20px;
       }
     }
   }

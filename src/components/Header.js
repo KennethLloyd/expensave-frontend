@@ -10,12 +10,12 @@ const Header = () => {
       <div className="header-right">
         <FontAwesomeIcon
           icon={faWallet}
-          className="header-wallet-icon"
-          size="3x"
+          className="header-right-wallet"
+          size="2x"
           color="white"
         />
         &nbsp;&nbsp;
-        <div className="header-total">
+        <div className="header-right-total">
           <p>Total</p>
           <h4>P 10,500.00</h4>
         </div>
