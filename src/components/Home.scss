@@ -4,8 +4,10 @@
   background: white;
   height: 100vh;
   display: grid;
-  grid-template-columns: 100px auto;
+  grid-template-columns: 0 auto;
   grid-template-rows: 88px 83px auto;
+  grid-template-columns: width 1s;
+
   @media (max-width: 1199px) {
     grid-template-columns: auto;
   }

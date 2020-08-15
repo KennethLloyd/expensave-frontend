@@ -11,10 +11,24 @@ header {
     padding: 0 10px;
   }
 
-  h3 {
-    font-size: 32px;
-    font-weight: $font-weight-regular;
-    color: $light-color;
+  .header-left {
+    display: flex;
+    align-items: center;
+
+    .burger-icon {
+      cursor: pointer;
+      color: $white;
+      margin-right: 80px;
+      @media (max-width: 767px) {
+        margin-right: 10px;
+      }
+    }
+
+    h3 {
+      font-size: 32px;
+      font-weight: $font-weight-regular;
+      color: $light-color;
+    }
   }
 
   .header-right {

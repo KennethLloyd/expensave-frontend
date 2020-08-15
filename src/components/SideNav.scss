@@ -4,33 +4,28 @@ aside {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  width: 100px;
+  width: 0px;
   @include BoxShadow(2);
-  padding: 45px 0;
-
-  .side-menu {
-    display: flex;
-    justify-content: center;
-
-    &-burger-icon {
-      cursor: pointer;
-      color: darken($color: $gray, $amount: 20);
-    }
-  }
 
   nav {
-    margin-top: 30px;
+    margin-top: 140px;
+    display: flex;
+    flex-direction: column;
 
     .nav-item {
       margin-top: 40px;
       display: flex;
-      flex-direction: column;
       align-items: center;
       color: darken($color: $gray, $amount: 20);
-    }
+      width: 100%;
 
-    p {
-      font-size: 12px;
+      .nav-icon {
+        width: 30%;
+      }
+
+      p {
+        width: 70%;
+      }
     }
   }
 }
