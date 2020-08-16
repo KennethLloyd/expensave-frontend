@@ -5,21 +5,53 @@ import { faWallet } from '@fortawesome/free-solid-svg-icons';
 import './Header.scss';
 
 const Header = () => {
+  console.log(window.innerWidth);
   const [sideNav, setSideNav] = useState('closed');
 
   const toggle = () => {
-    if (sideNav === 'closed') {
-      document.getElementsByClassName('homepage')[0].style.gridTemplateColumns =
-        '200px auto';
-      document.getElementsByTagName('aside')[0].style.width = '200px';
+    if (window.innerWidth > 1024) {
+      // web view
+      if (sideNav === 'closed') {
+        document.getElementsByClassName(
+          'homepage',
+        )[0].style.gridTemplateColumns = '200px auto';
+        document.getElementsByTagName('aside')[0].style.width = '200px';
 
-      setSideNav('open');
+        setSideNav('open');
+      } else {
+        document.getElementsByClassName(
+          'homepage',
+        )[0].style.gridTemplateColumns = '0 auto';
+        document.getElementsByTagName('aside')[0].style.width = '0px';
+
+        setSideNav('closed');
+      }
     } else {
-      document.getElementsByClassName('homepage')[0].style.gridTemplateColumns =
-        '0 auto';
-      document.getElementsByTagName('aside')[0].style.width = '0px';
+      // mobile view
+      if (sideNav === 'closed') {
+        document.getElementsByClassName('homepage')[0].style.gridTemplateRows =
+          '88px minmax(135px, auto) 130px 1fr;';
 
-      setSideNav('closed');
+        document.getElementsByTagName('aside')[0].style.width = '100%';
+        document.getElementsByTagName('aside')[0].style.gridRow = '2/3';
+
+        document.getElementsByClassName('transaction-page')[0].style.gridRow =
+          '3/5';
+
+        document.getElementsByTagName('aside')[0].style.visibility = 'visible';
+
+        setSideNav('open');
+      } else {
+        document.getElementsByClassName('homepage')[0].style.gridTemplateRows =
+          '88px 130px auto;';
+
+        document.getElementsByClassName('transaction-page')[0].style.gridRow =
+          '2/4';
+
+        document.getElementsByTagName('aside')[0].style.visibility = 'hidden';
+
+        setSideNav('closed');
+      }
     }
   };
 
