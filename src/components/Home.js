@@ -1,27 +1,25 @@
-import React, { useState, useContext } from 'react';
-import { UserContext } from '../context/UserState';
+import React, { useState } from 'react';
 import './Home.scss';
 import Header from './Header';
 import SideNav from './SideNav';
 import Transactions from './transactions/Transactions';
+import Dashboard from './dashboard/Dashboard';
+import Savings from './savings/Savings';
 
 const Home = () => {
-  const { logOut } = useContext(UserContext);
   const [activePage, setActivePage] = useState('Transactions');
 
   return (
     <div className="homepage">
       <Header />
       <SideNav activePage={activePage} setActivePage={setActivePage} />
-      <Transactions />
-      {/* <h1>Transactions</h1>
-      <button
-        onClick={() => {
-          logOut();
-        }}
-      >
-        Logout
-      </button> */}
+      {activePage === 'Transactions' ? (
+        <Transactions />
+      ) : activePage === 'Dashboard' ? (
+        <Dashboard />
+      ) : (
+        <Savings />
+      )}
     </div>
   );
 };

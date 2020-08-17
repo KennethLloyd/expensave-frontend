@@ -5,7 +5,6 @@ import { faWallet } from '@fortawesome/free-solid-svg-icons';
 import './Header.scss';
 
 const Header = () => {
-  console.log(window.innerWidth);
   const [sideNav, setSideNav] = useState('closed');
 
   const toggle = () => {
