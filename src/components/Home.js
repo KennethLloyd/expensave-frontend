@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { UserContext } from '../context/UserState';
 import './Home.scss';
 import Header from './Header';
@@ -7,11 +7,12 @@ import Transactions from './transactions/Transactions';
 
 const Home = () => {
   const { logOut } = useContext(UserContext);
+  const [activePage, setActivePage] = useState('Transactions');
 
   return (
     <div className="homepage">
       <Header />
-      <SideNav />
+      <SideNav activePage={activePage} setActivePage={setActivePage} />
       <Transactions />
       {/* <h1>Transactions</h1>
       <button

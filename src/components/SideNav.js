@@ -5,11 +5,21 @@ import { faHandshake } from '@fortawesome/free-solid-svg-icons';
 import { faPiggyBank } from '@fortawesome/free-solid-svg-icons';
 import './SideNav.scss';
 
-const SideNav = () => {
+const SideNav = ({ activePage, setActivePage }) => {
+  const isActive = (page) => {
+    if (page === activePage) {
+      return 'active';
+    }
+    return '';
+  };
+
   return (
     <aside>
       <nav>
-        <div className="nav-item nav-dashboard">
+        <div
+          className={`nav-item ${isActive('Dashboard')}`}
+          onClick={() => setActivePage('Dashboard')}
+        >
           <FontAwesomeIcon
             icon={faChartLine}
             className="nav-icon nav-icon-dashboard"
@@ -17,7 +27,10 @@ const SideNav = () => {
           />
           <p>Dashboard</p>
         </div>
-        <div className="nav-item nav-transactions">
+        <div
+          className={`nav-item ${isActive('Transactions')}`}
+          onClick={() => setActivePage('Transactions')}
+        >
           <FontAwesomeIcon
             icon={faHandshake}
             className="nav-icon nav-icon-transactions"
@@ -25,7 +38,10 @@ const SideNav = () => {
           />
           <p>Transactions</p>
         </div>
-        <div className="nav-item nav-savings">
+        <div
+          className={`nav-item ${isActive('Savings')}`}
+          onClick={() => setActivePage('Savings')}
+        >
           <FontAwesomeIcon
             icon={faPiggyBank}
             className="nav-icon nav-icon-savings"

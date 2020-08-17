@@ -30,6 +30,12 @@ aside {
       align-items: center;
       color: darken($color: $gray, $amount: 20);
       width: 100%;
+      cursor: pointer;
+
+      &:hover,
+      &.active {
+        color: $secondary-color;
+      }
 
       .nav-icon {
         width: 30%;
