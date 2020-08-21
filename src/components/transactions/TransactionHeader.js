@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import {
+  faChevronLeft,
+  faChevronRight,
+  faPlus,
+} from '@fortawesome/free-solid-svg-icons';
 import { format, sub, add } from 'date-fns';
 import './TransactionHeader.scss';
 
@@ -39,6 +42,9 @@ const TransactionHeader = () => {
           <h4>P 44,000.00</h4>
         </div>
       </div>
+      <button className="transaction-header-create-btn">
+        <FontAwesomeIcon icon={faPlus} size="2x" />
+      </button>
     </div>
   );
 };

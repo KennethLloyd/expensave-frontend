@@ -1,6 +1,7 @@
 @import '../../styles/index.scss';
 
 .transaction-header {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -90,6 +91,24 @@
       flex-direction: column;
       color: $secondary-color;
       margin: 0 20px;
+    }
+  }
+
+  &-create-btn {
+    @include BoxShadow(3);
+    position: absolute;
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    color: $white;
+    background-color: $secondary-color;
+    right: 3rem;
+    top: 3rem;
+    border: solid $secondary-color;
+
+    &:hover {
+      background-color: darken($color: $secondary-color, $amount: 10);
+      border-color: darken($color: $secondary-color, $amount: 10);
     }
   }
 }
