@@ -15,6 +15,7 @@ const Header = () => {
           'homepage',
         )[0].style.gridTemplateColumns = '200px auto';
         document.getElementsByTagName('aside')[0].style.width = '200px';
+        document.getElementsByTagName('aside')[0].style.height = '100vh';
 
         setSideNav('open');
       } else {

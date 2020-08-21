@@ -50,6 +50,7 @@
       border-radius: 5px;
       margin: 0 10px;
       color: $dark-color;
+      border: solid 1px $gray;
     }
 
     input {
@@ -60,6 +61,7 @@
       border-radius: 5px;
       margin: 0 10px;
       color: $dark-color;
+      border: solid 1px $gray;
     }
   }
 
@@ -109,6 +111,11 @@
     &:hover {
       background-color: darken($color: $secondary-color, $amount: 10);
       border-color: darken($color: $secondary-color, $amount: 10);
+    }
+
+    @media (max-width: 1024px) {
+      position: fixed;
+      top: 90%;
     }
   }
 }
