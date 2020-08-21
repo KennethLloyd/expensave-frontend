@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { format, sub, add } from 'date-fns';
 import './TransactionHeader.scss';
 
 const TransactionHeader = () => {
+  const [date, setDate] = useState(new Date());
+
   return (
     <div className="transaction-header">
       <div className="transaction-header-date-select">
-        <FontAwesomeIcon icon={faChevronLeft} />
-        <h3>August</h3>
-        <FontAwesomeIcon icon={faChevronRight} />
+        <FontAwesomeIcon
+          icon={faChevronLeft}
+          onClick={() => setDate(sub(date, { months: 1 }), 'MMMM')}
+        />
+        <h3>{format(date, 'MMMM')}</h3>
+        <FontAwesomeIcon
+          icon={faChevronRight}
+          onClick={() => setDate(add(date, { months: 1 }), 'MMMM')}
+        />
       </div>
       <div className="transaction-header-filter-group">
         <select>
