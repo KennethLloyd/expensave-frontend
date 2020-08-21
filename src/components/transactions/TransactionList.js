@@ -12,6 +12,11 @@ const TransactionList = () => {
       <Transaction />
       <Transaction />
       <Transaction />
+      <Transaction />
+      <Transaction />
+      <Transaction />
+      <Transaction />
+      <Transaction />
     </div>
   );
 };
