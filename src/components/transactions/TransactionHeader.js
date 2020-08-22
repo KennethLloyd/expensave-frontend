@@ -6,7 +6,9 @@ import {
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import { format, sub, add } from 'date-fns';
+import './CreateTransaction';
 import './TransactionHeader.scss';
+import CreateTransaction from './CreateTransaction';
 
 const TransactionHeader = () => {
   const [date, setDate] = useState(new Date());
@@ -42,9 +44,10 @@ const TransactionHeader = () => {
           <h4>P 44,000.00</h4>
         </div>
       </div>
-      <button className="transaction-header-create-btn">
+      {/* <button className="transaction-header-create-btn">
         <FontAwesomeIcon icon={faPlus} size="2x" />
-      </button>
+      </button> */}
+      <CreateTransaction />
     </div>
   );
 };
