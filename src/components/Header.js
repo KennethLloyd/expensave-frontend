@@ -5,7 +5,6 @@ import { faWallet } from '@fortawesome/free-solid-svg-icons';
 import './Header.scss';
 
 const Header = () => {
-  console.log(window.innerWidth);
   const [sideNav, setSideNav] = useState('closed');
 
   const toggle = () => {
@@ -16,6 +15,7 @@ const Header = () => {
           'homepage',
         )[0].style.gridTemplateColumns = '200px auto';
         document.getElementsByTagName('aside')[0].style.width = '200px';
+        document.getElementsByTagName('aside')[0].style.height = '100vh';
 
         setSideNav('open');
       } else {

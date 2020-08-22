@@ -1,0 +1,47 @@
+@import '../../styles/index.scss';
+
+.create-trx-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.5);
+  transition: all ease 1s;
+  z-index: 3;
+
+  &.open {
+    opacity: 1;
+  }
+
+  &.close {
+    opacity: 0;
+  }
+
+  &-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: auto;
+    height: 50vh;
+    width: 40vw;
+    background-color: $light-color;
+    border: 1px solid black;
+  }
+
+  .close-overlay {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    display: block;
+    z-index: auto;
+    position: fixed;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+}
