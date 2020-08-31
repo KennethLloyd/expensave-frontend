@@ -29,9 +29,39 @@ const CreateTransaction = () => {
       {open ? (
         <div className={`create-trx-modal ${opacity}`}>
           <div className="create-trx-modal-content">
-            <p>HELLO PO</p>
+            <div className="create-trx-modal-content-header">
+              <h5>Create Transaction</h5>
+              <a onClick={closeModal}>
+                <strong>x</strong>
+              </a>
+            </div>
+            <div className="create-trx-modal-content-body">
+              <div>
+                <span>Date and Time: </span>
+                <input type="datetime-local" />
+              </div>
+              <div>
+                <span>Name: </span>
+                <input type="text" />
+              </div>
+              <div>
+                <span>Amount: </span>
+                <input type="number" />
+              </div>
+              <div className="trx-description">
+                <span>Description: </span>
+                <textarea></textarea>
+              </div>
+              <div>
+                <span>Categories: </span>
+                <select></select>
+              </div>
+            </div>
+            <div className="create-trx-modal-content-footer">
+              <button>Submit</button>
+            </div>
           </div>
-          <a href="#" className="close-overlay" onClick={closeModal} />
+          {/* <a className="close-overlay" onClick={closeModal} /> */}
         </div>
       ) : (
         ''
