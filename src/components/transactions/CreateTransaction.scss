@@ -71,6 +71,7 @@
 
         span {
           width: 30%;
+          color: $dark-color;
         }
 
         input,
@@ -84,6 +85,7 @@
           margin-right: 10%;
           height: 1.8rem;
           font-size: 14px;
+          background-color: $white;
         }
 
         textarea {

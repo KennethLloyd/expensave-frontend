@@ -10,6 +10,11 @@ export default (state, action) => {
         ...state,
         token: null,
       };
+    case 'GET_CATEGORIES':
+      return {
+        ...state,
+        categories: action.payload,
+      };
     case 'START_LOADING':
       return {
         ...state,

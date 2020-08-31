@@ -20,6 +20,7 @@ export const UserProvider = ({ children }) => {
     startLoading,
     finishLoading,
     setToken,
+    getCategories,
     setAlert,
     clearAlert,
   } = useContext(GlobalContext);
@@ -39,6 +40,7 @@ export const UserProvider = ({ children }) => {
       });
 
       setToken(response.data.token);
+      getCategories(response.data.token);
 
       clearAlert();
 

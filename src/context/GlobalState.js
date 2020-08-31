@@ -1,9 +1,11 @@
 import React, { useReducer, createContext } from 'react';
 import globalReducer from '../reducers/globalReducer';
+import api from '../apis/api';
 
 // Initial state
 const initialState = {
   token: localStorage.getItem('token') ? localStorage.getItem('token') : null,
+  categories: [],
   isLoading: false,
   alertMessage: null,
   alertType: null,
@@ -31,6 +33,21 @@ export const GlobalProvider = ({ children }) => {
     dispatch({
       type: 'CLEAR_TOKEN',
     });
+  };
+
+  const getCategories = async (token) => {
+    try {
+      const response = await api.get('/categories', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      dispatch({
+        type: 'GET_CATEGORIES',
+        payload: response.data,
+      });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const startLoading = () => {
@@ -62,12 +79,14 @@ export const GlobalProvider = ({ children }) => {
     <GlobalContext.Provider
       value={{
         token: state.token,
+        categories: state.categories,
         isLoading: state.isLoading,
         alertType: state.alertType,
         alertMessage: state.alertMessage,
         alertLocation: state.alertLocation,
         setToken,
         clearToken,
+        getCategories,
         startLoading,
         finishLoading,
         setAlert,

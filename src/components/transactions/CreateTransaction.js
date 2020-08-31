@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import './CreateTransaction.scss';
+import { GlobalContext } from '../../context/GlobalState';
 
 const CreateTransaction = () => {
   const [open, setOpen] = useState(false);
   const [opacity, setOpacity] = useState('');
+  const { categories } = useContext(GlobalContext);
+  console.log(categories);
 
   const openModal = () => {
     if (!open) {
@@ -41,6 +44,13 @@ const CreateTransaction = () => {
                 <input type="datetime-local" />
               </div>
               <div>
+                <span>Type: </span>
+                <select>
+                  <option>Income</option>
+                  <option>Expense</option>
+                </select>
+              </div>
+              <div>
                 <span>Name: </span>
                 <input type="text" />
               </div>
@@ -54,7 +64,12 @@ const CreateTransaction = () => {
               </div>
               <div>
                 <span>Categories: </span>
-                <select></select>
+                <select>
+                  {categories.map((category) => {
+                    console.log(category);
+                    return <option key={category._id}>{category.name}</option>;
+                  })}
+                </select>
               </div>
             </div>
             <div className="create-trx-modal-content-footer">
