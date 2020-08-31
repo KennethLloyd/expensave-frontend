@@ -7,10 +7,9 @@
   bottom: 0;
   left: 0;
   opacity: 0;
-  pointer-events: none;
+  // pointer-events: none;
   background: rgba(0, 0, 0, 0.5);
   transition: all ease 1s;
-  z-index: 3;
 
   &.open {
     opacity: 1;
@@ -21,15 +20,139 @@
   }
 
   &-content {
-    position: fixed;
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: auto;
-    height: 50vh;
+    z-index: 3;
+    height: auto;
     width: 40vw;
     background-color: $light-color;
-    border: 1px solid black;
+    border-radius: 5px;
+    @media (max-width: 1199px) {
+      width: 70vw;
+    }
+    @media (max-width: 991px) {
+      width: 90vw;
+    }
+
+    &-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: $primary-color;
+      height: 2rem;
+      border-top-left-radius: inherit;
+      border-top-right-radius: inherit;
+      @include BoxShadow(1);
+
+      h5 {
+        color: white;
+        font-size: 1.1rem;
+        margin-left: 1rem;
+        font-weight: $font-weight-medium;
+      }
+
+      a {
+        color: $dark-color;
+        cursor: pointer;
+        margin-right: 1rem;
+      }
+    }
+
+    &-body {
+      padding: 0.5rem 0.8rem;
+
+      div {
+        width: 100%;
+        margin: 1rem 1rem;
+        display: flex;
+        justify-content: space-between;
+
+        span {
+          width: 30%;
+          color: $dark-color;
+        }
+
+        input,
+        textarea,
+        select {
+          // width: 50%;
+          width: 50%;
+          padding: 0px 10px;
+          border-radius: 5px;
+          border: solid 1px $gray;
+          margin-right: 10%;
+          height: 1.8rem;
+          font-size: 14px;
+          background-color: $white;
+        }
+
+        textarea {
+          height: 3rem;
+          font-family: inherit;
+        }
+      }
+
+      .checkbox {
+        display: flex;
+        align-items: flex-start;
+
+        span {
+          width: 30%;
+          color: $dark-color;
+        }
+
+        &-items {
+          display: flex;
+          flex-wrap: wrap;
+          margin: 0;
+          margin-right: 10%;
+          width: 50%;
+
+          div {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            margin: 0;
+            width: auto;
+
+            input {
+              margin: 0;
+              padding: 0;
+              width: 1rem;
+            }
+
+            label {
+              margin-left: 0.5rem;
+              align-self: center;
+            }
+          }
+        }
+      }
+    }
+
+    &-footer {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      height: 3rem;
+      border-top: 1px solid $gray;
+
+      button {
+        border-radius: 5px;
+        background-color: $secondary-color;
+        border: 1px solid $secondary-color;
+        color: $white;
+        height: 2rem;
+        width: 5rem;
+        margin-right: 1rem;
+
+        &:hover {
+          background-color: darken($color: $secondary-color, $amount: 10%);
+        }
+      }
+    }
   }
 
   .close-overlay {
@@ -39,9 +162,8 @@
     left: 0;
     opacity: 0;
     display: block;
-    z-index: auto;
+    z-index: 2;
     position: fixed;
-    cursor: pointer;
-    pointer-events: auto;
+    // pointer-events: auto;
   }
 }
