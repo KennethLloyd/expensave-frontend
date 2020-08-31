@@ -5,6 +5,7 @@ import SideNav from './SideNav';
 import Transactions from './transactions/Transactions';
 import Dashboard from './dashboard/Dashboard';
 import Savings from './savings/Savings';
+import { TransactionProvider } from '../context/TransactionState';
 
 const Home = () => {
   const [activePage, setActivePage] = useState('Transactions');
@@ -14,7 +15,9 @@ const Home = () => {
       <Header />
       <SideNav activePage={activePage} setActivePage={setActivePage} />
       {activePage === 'Transactions' ? (
-        <Transactions />
+        <TransactionProvider>
+          <Transactions />
+        </TransactionProvider>
       ) : activePage === 'Dashboard' ? (
         <Dashboard />
       ) : (

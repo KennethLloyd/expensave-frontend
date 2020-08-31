@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import './CreateTransaction.scss';
 import { GlobalContext } from '../../context/GlobalState';
+import { TransactionContext } from '../../context/TransactionState';
 
 const CreateTransaction = () => {
   const [open, setOpen] = useState(false);
@@ -12,7 +13,9 @@ const CreateTransaction = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
+  const [thisCategories, setThisCategories] = useState([]);
   const { categories } = useContext(GlobalContext);
+  const { createTransaction } = useContext(TransactionContext);
 
   const openModal = () => {
     if (!open) {
@@ -28,6 +31,16 @@ const CreateTransaction = () => {
     }
   };
 
+  const onCheckboxClick = (e) => {
+    if (e.target.checked) {
+      thisCategories.push(e.target.id);
+    } else {
+      const index = thisCategories.indexOf(e.target.id);
+      thisCategories.splice(index, 1);
+    }
+    setThisCategories([...thisCategories]);
+  };
+
   const submit = () => {
     const transaction = {
       transactionDate,
@@ -35,7 +48,12 @@ const CreateTransaction = () => {
       name,
       amount,
       description,
+      categories: thisCategories,
     };
+
+    createTransaction(transaction);
+
+    closeModal();
   };
 
   return (
@@ -103,14 +121,14 @@ const CreateTransaction = () => {
                   {categories.map((category) => {
                     if (transactionType === category.transactionType) {
                       return (
-                        <div>
+                        <div key={category._id}>
                           <input
                             id={category._id}
-                            key={category._id}
                             type="checkbox"
                             value={category.name}
+                            onClick={onCheckboxClick}
                           />
-                          <label for={category._id}>{category.name}</label>
+                          <label htmlFor={category._id}>{category.name}</label>
                         </div>
                       );
                     }
