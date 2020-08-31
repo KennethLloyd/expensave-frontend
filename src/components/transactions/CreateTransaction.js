@@ -7,7 +7,11 @@ import { GlobalContext } from '../../context/GlobalState';
 const CreateTransaction = () => {
   const [open, setOpen] = useState(false);
   const [opacity, setOpacity] = useState('');
+  const [datetime, setDatetime] = useState('');
   const [type, setType] = useState('Income');
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [amount, setAmount] = useState('');
   const { categories } = useContext(GlobalContext);
 
   const openModal = () => {
@@ -41,7 +45,13 @@ const CreateTransaction = () => {
             <div className="create-trx-modal-content-body">
               <div>
                 <span>Date and Time: </span>
-                <input type="datetime-local" />
+                <input
+                  type="datetime-local"
+                  onChange={(e) => {
+                    let dateAndTime = e.target.value.split('T');
+                    setDatetime(`${dateAndTime[0]} ${dateAndTime[1]}`);
+                  }}
+                />
               </div>
               <div>
                 <span>Type: </span>
@@ -56,15 +66,26 @@ const CreateTransaction = () => {
               </div>
               <div>
                 <span>Name: </span>
-                <input type="text" />
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </div>
               <div>
                 <span>Amount: </span>
-                <input type="number" />
+                <input
+                  type="number"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                />
               </div>
               <div className="trx-description">
                 <span>Description: </span>
-                <textarea></textarea>
+                <textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                ></textarea>
               </div>
               <div>
                 <span>Categories: </span>
