@@ -7,8 +7,8 @@ import { GlobalContext } from '../../context/GlobalState';
 const CreateTransaction = () => {
   const [open, setOpen] = useState(false);
   const [opacity, setOpacity] = useState('');
+  const [type, setType] = useState('Income');
   const { categories } = useContext(GlobalContext);
-  console.log(categories);
 
   const openModal = () => {
     if (!open) {
@@ -45,7 +45,11 @@ const CreateTransaction = () => {
               </div>
               <div>
                 <span>Type: </span>
-                <select>
+                <select
+                  onChange={(e) => {
+                    setType(e.target.value);
+                  }}
+                >
                   <option>Income</option>
                   <option>Expense</option>
                 </select>
@@ -66,8 +70,11 @@ const CreateTransaction = () => {
                 <span>Categories: </span>
                 <select>
                   {categories.map((category) => {
-                    console.log(category);
-                    return <option key={category._id}>{category.name}</option>;
+                    if (type === category.transactionType) {
+                      return (
+                        <option key={category._id}>{category.name}</option>
+                      );
+                    }
                   })}
                 </select>
               </div>
