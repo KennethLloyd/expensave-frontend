@@ -93,6 +93,43 @@
           font-family: inherit;
         }
       }
+
+      .checkbox {
+        display: flex;
+        align-items: flex-start;
+
+        span {
+          width: 30%;
+          color: $dark-color;
+        }
+
+        &-items {
+          display: flex;
+          flex-wrap: wrap;
+          margin: 0;
+          margin-right: 10%;
+          width: 50%;
+
+          div {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            margin: 0;
+            width: auto;
+
+            input {
+              margin: 0;
+              padding: 0;
+              width: 1rem;
+            }
+
+            label {
+              margin-left: 0.5rem;
+              align-self: center;
+            }
+          }
+        }
+      }
     }
 
     &-footer {

@@ -7,8 +7,8 @@ import { GlobalContext } from '../../context/GlobalState';
 const CreateTransaction = () => {
   const [open, setOpen] = useState(false);
   const [opacity, setOpacity] = useState('');
-  const [datetime, setDatetime] = useState('');
-  const [type, setType] = useState('Income');
+  const [transactionDate, setTransactionDate] = useState('');
+  const [transactionType, setTransactionType] = useState('Income');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
@@ -26,6 +26,16 @@ const CreateTransaction = () => {
       setOpacity('close');
       setOpen(false);
     }
+  };
+
+  const submit = () => {
+    const transaction = {
+      transactionDate,
+      transactionType,
+      name,
+      amount,
+      description,
+    };
   };
 
   return (
@@ -49,7 +59,7 @@ const CreateTransaction = () => {
                   type="datetime-local"
                   onChange={(e) => {
                     let dateAndTime = e.target.value.split('T');
-                    setDatetime(`${dateAndTime[0]} ${dateAndTime[1]}`);
+                    setTransactionDate(`${dateAndTime[0]} ${dateAndTime[1]}`);
                   }}
                 />
               </div>
@@ -57,7 +67,7 @@ const CreateTransaction = () => {
                 <span>Type: </span>
                 <select
                   onChange={(e) => {
-                    setType(e.target.value);
+                    setTransactionType(e.target.value);
                   }}
                 >
                   <option>Income</option>
@@ -87,21 +97,38 @@ const CreateTransaction = () => {
                   onChange={(e) => setDescription(e.target.value)}
                 ></textarea>
               </div>
-              <div>
+              <div className="checkbox">
                 <span>Categories: </span>
-                <select>
+                <div className="checkbox-items">
                   {categories.map((category) => {
-                    if (type === category.transactionType) {
+                    if (transactionType === category.transactionType) {
+                      return (
+                        <div>
+                          <input
+                            id={category._id}
+                            key={category._id}
+                            type="checkbox"
+                            value={category.name}
+                          />
+                          <label for={category._id}>{category.name}</label>
+                        </div>
+                      );
+                    }
+                  })}
+                </div>
+                {/* <select>
+                  {categories.map((category) => {
+                    if (transactionType === category.transactionType) {
                       return (
                         <option key={category._id}>{category.name}</option>
                       );
                     }
                   })}
-                </select>
+                </select> */}
               </div>
             </div>
             <div className="create-trx-modal-content-footer">
-              <button>Submit</button>
+              <button onClick={submit}>Submit</button>
             </div>
           </div>
           {/* <a className="close-overlay" onClick={closeModal} /> */}
