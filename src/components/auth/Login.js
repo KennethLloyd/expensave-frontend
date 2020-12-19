@@ -10,6 +10,7 @@ import {
   TextField,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { UserContext } from '../../context/UserState';
 
 const useStyles = makeStyles({
   loginForm: {

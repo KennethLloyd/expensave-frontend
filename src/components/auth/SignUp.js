@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Grid,
@@ -10,6 +10,7 @@ import {
   TextField,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { UserContext } from '../../context/UserState';
 
 const useStyles = makeStyles({
   signUpForm: {
@@ -39,11 +40,20 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const { signUp } = useContext(UserContext);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(email);
-    console.log(password);
+    const userInfo = {
+      firstName,
+      lastName,
+      email,
+      password,
+    };
+
+    console.log(userInfo);
+    signUp(userInfo);
   };
 
   return (

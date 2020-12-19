@@ -19,7 +19,7 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(globalReducer, initialState);
 
   // Actions
-  const setToken = token => {
+  const setToken = (token) => {
     dispatch({
       type: 'SET_TOKEN',
       payload: token,
