@@ -7,6 +7,7 @@ import history from '../history.js';
 import Home from './Home';
 import Login from './auth/Login';
 import SignUp from './auth/SignUp';
+import ForgotPassword from './auth/ForgotPassword';
 
 const App = () => {
   return (
@@ -16,16 +17,11 @@ const App = () => {
           <AuthenticatedRoute path="/" exact component={Home} />
           <UnauthenticatedRoute path="/login" exact component={Login} />
           <UnauthenticatedRoute path="/signup" exact component={SignUp} />
-          {/* <UnauthenticatedRoute
+          <UnauthenticatedRoute
             path="/forgot-password"
             exact
             component={ForgotPassword}
           />
-          <UnauthenticatedRoute
-            path="/reset-password/:resetToken"
-            exact
-            component={ChangePassword}
-          /> */}
         </Switch>
       </Router>
     </GlobalProvider>
