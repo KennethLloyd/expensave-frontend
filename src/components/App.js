@@ -3,13 +3,9 @@ import { Router, Switch } from 'react-router-dom';
 import { GlobalProvider } from '../context/GlobalState';
 import AuthenticatedRoute from './AuthenticatedRoute';
 import UnauthenticatedRoute from './UnauthenticatedRoute';
-import Login from './auth/Login';
-import SignUp from './auth/SignUp';
-import ForgotPassword from './auth/ForgotPassword';
-import ChangePassword from './auth/ChangePassword';
-import Home from './Home';
 import history from '../history.js';
-import './App.scss';
+import Home from './Home';
+import Login from './auth/Login';
 
 const App = () => {
   return (
@@ -18,8 +14,8 @@ const App = () => {
         <Switch>
           <AuthenticatedRoute path="/" exact component={Home} />
           <UnauthenticatedRoute path="/login" exact component={Login} />
-          <UnauthenticatedRoute path="/signup" exact component={SignUp} />
-          <UnauthenticatedRoute
+          {/* <UnauthenticatedRoute path="/signup" exact component={SignUp} /> */}
+          {/* <UnauthenticatedRoute
             path="/forgot-password"
             exact
             component={ForgotPassword}
@@ -28,7 +24,7 @@ const App = () => {
             path="/reset-password/:resetToken"
             exact
             component={ChangePassword}
-          />
+          /> */}
         </Switch>
       </Router>
     </GlobalProvider>
