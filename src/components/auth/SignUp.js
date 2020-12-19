@@ -12,14 +12,14 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
-  loginForm: {
+  signUpForm: {
     justifyContent: 'center',
     minHeight: '90vh',
   },
   buttonBlock: {
     width: '100%',
   },
-  loginPaper: {
+  signUpPaper: {
     justifyContent: 'center',
     minHeight: '30vh',
     padding: '50px',
@@ -27,13 +27,15 @@ const useStyles = makeStyles({
   link: {
     textDecoration: 'none',
   },
-  signUpLink: {
+  loginLink: {
     marginTop: '50px',
   },
 });
 
-const Login = () => {
+const SignUp = () => {
   const classes = useStyles();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -62,21 +64,47 @@ const Login = () => {
             direction="column"
             justify="center"
             spacing={2}
-            className={classes.loginForm}
+            className={classes.signUpForm}
           >
             <Paper
               variant="elevation"
               elevation={2}
-              className={classes.loginPaper}
+              className={classes.signUpPaper}
             >
               <Grid item>
                 <Typography component="h1" variant="h5" align="center">
-                  Log in
+                  Sign up
                 </Typography>
               </Grid>
               <Grid item>
                 <form onSubmit={handleSubmit}>
                   <Grid container direction="column" spacing={2}>
+                    <Grid item>
+                      <TextField
+                        type="string"
+                        placeholder="First name"
+                        fullWidth
+                        name="firstName"
+                        variant="outlined"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        required
+                        autoFocus
+                      />
+                    </Grid>
+                    <Grid item>
+                      <TextField
+                        type="string"
+                        placeholder="Last name"
+                        fullWidth
+                        name="lastName"
+                        variant="outlined"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        required
+                        autoFocus
+                      />
+                    </Grid>
                     <Grid item>
                       <TextField
                         type="email"
@@ -116,12 +144,9 @@ const Login = () => {
                 </form>
               </Grid>
               <Grid item>
-                <Link to="/forgot-password" className={classes.link}>
-                  <Typography variant="body2">Forgot Password?</Typography>
-                </Link>
-                <Link to="/signup" className={classes.link}>
-                  <Typography variant="body2" className={classes.signUpLink}>
-                    Don't have an account? Sign up
+                <Link to="/login" className={classes.link}>
+                  <Typography variant="body2" className={classes.loginLink}>
+                    Already have an account? Log in
                   </Typography>
                 </Link>
               </Grid>
@@ -133,4 +158,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
