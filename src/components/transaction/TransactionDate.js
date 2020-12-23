@@ -1,17 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import {
-  Grid,
-  AppBar,
-  Toolbar,
-  Typography,
-  Paper,
-  Button,
-  TextField,
-  MenuItem,
-  Box,
-} from '@material-ui/core';
-import { spacing } from '@material-ui/system';
+import { Grid, Typography, Button, Box } from '@material-ui/core';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -39,7 +27,7 @@ const TransactionDate = () => {
           <KeyboardArrowLeft />
           Back
         </Button>
-        <Typography variant="body2">December 2020</Typography>
+        <Typography variant="body1">December 2020</Typography>
         <Button size="small" className={classes.rightButton}>
           Next
           <KeyboardArrowRight />
