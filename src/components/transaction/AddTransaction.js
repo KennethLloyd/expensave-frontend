@@ -33,15 +33,6 @@ const useStyles = makeStyles({
     minHeight: '30vh',
     padding: '50px',
   },
-  rightGrid: {
-    justifyContent: 'center',
-    minHeight: '90vh',
-  },
-  rightPaper: {
-    justifyContent: 'center',
-    minHeight: '30vh',
-    padding: '50px',
-  },
   buttonBlock: {
     width: '100%',
   },
