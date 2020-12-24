@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Grid,
@@ -37,9 +37,15 @@ const Login = () => {
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { logIn } = useContext(UserContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    logIn({
+      email,
+      password,
+    });
   };
 
   return (
