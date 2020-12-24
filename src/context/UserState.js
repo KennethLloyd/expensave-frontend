@@ -130,14 +130,6 @@ export const UserProvider = ({ children }) => {
 
   const logOut = async () => {
     try {
-      startLoading();
-
-      await api.post('/users/logout', null, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      finishLoading();
-
       dispatch({
         type: 'LOG_OUT',
       });
@@ -149,8 +141,6 @@ export const UserProvider = ({ children }) => {
 
       history.push('/login');
     } catch (e) {
-      finishLoading();
-      //setAlert('error', e.response.data.error, 'Dashboard');
       history.push('/');
     }
   };
