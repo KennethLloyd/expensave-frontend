@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Grid, Typography, Button, Box } from '@material-ui/core';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
+import { format, sub, add } from 'date-fns';
+import { TransactionContext } from '../../context/TransactionState';
 
 const useStyles = makeStyles({
   dateNavContainer: {
@@ -19,16 +21,36 @@ const useStyles = makeStyles({
 
 const TransactionDate = () => {
   const classes = useStyles();
+  const [date, setDate] = useState(new Date());
+  const { dateFilter, changeDateFilter } = useContext(TransactionContext);
+
+  const changeDate = (operation) => {
+    if (operation === 'add') {
+      changeDateFilter(`${format(add(date, { months: 1 }), 'yyyy-MM')}-01`);
+      setDate(add(date, { months: 1 }), 'MMMM');
+    } else {
+      changeDateFilter(`${format(sub(date, { months: 1 }), 'yyyy-MM')}-01`);
+      setDate(sub(date, { months: 1 }), 'MMMM');
+    }
+  };
 
   return (
     <Grid item>
       <Box className={classes.dateNavContainer}>
-        <Button size="small" className={classes.leftButton}>
+        <Button
+          size="small"
+          className={classes.leftButton}
+          onClick={() => changeDate('sub')}
+        >
           <KeyboardArrowLeft />
           Back
         </Button>
         <Typography variant="body1">December 2020</Typography>
-        <Button size="small" className={classes.rightButton}>
+        <Button
+          size="small"
+          className={classes.rightButton}
+          onClick={() => changeDate('add')}
+        >
           Next
           <KeyboardArrowRight />
         </Button>
