@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Grid,
@@ -9,6 +9,7 @@ import {
   MenuItem,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { TransactionContext } from '../../context/TransactionState';
 
 const transactionTypes = [
   {
@@ -57,20 +58,20 @@ const AddTransaction = () => {
   const [details, setDetails] = useState('');
   const [transactionType, setTransactionType] = useState('Expense');
   const [amount, setAmount] = useState(0.0);
+  const { addTransaction } = useContext(TransactionContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const transactionInfo = {
-      date,
-      time,
+      transactionDate: `${date} ${time}`,
       name,
       details,
       transactionType,
       amount,
     };
 
-    console.log(transactionInfo);
+    addTransaction(transactionInfo);
   };
 
   return (

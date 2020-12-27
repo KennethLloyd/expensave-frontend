@@ -6,7 +6,7 @@ export default (state, action) => {
         dateFilter: action.payload,
       };
 
-    case 'CREATE_TRANSACTION':
+    case 'ADD_TRANSACTION':
       return {
         ...state,
         transactions: [...state.transactions, action.payload],

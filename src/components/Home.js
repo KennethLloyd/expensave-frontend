@@ -5,6 +5,7 @@ import AddTransaction from './transaction/AddTransaction';
 import TransactionList from './transaction/TransactionList';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { UserContext } from '../context/UserState';
+import { TransactionProvider } from '../context/TransactionState';
 
 const Home = () => {
   const { logOut } = useContext(UserContext);
@@ -29,8 +30,10 @@ const Home = () => {
         </Toolbar>
       </AppBar>
       <Grid container spacing={2} justify="space-around" direction="row">
-        <AddTransaction />
-        <TransactionList />
+        <TransactionProvider>
+          <AddTransaction />
+          <TransactionList />
+        </TransactionProvider>
       </Grid>
     </div>
   );

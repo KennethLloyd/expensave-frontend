@@ -52,7 +52,6 @@ const SignUp = () => {
       password,
     };
 
-    console.log(userInfo);
     signUp(userInfo);
   };
 

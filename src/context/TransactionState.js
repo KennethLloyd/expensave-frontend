@@ -32,7 +32,7 @@ export const TransactionProvider = ({ children }) => {
   };
 
   // Actions
-  const createTransaction = async (transactionInfo) => {
+  const addTransaction = async (transactionInfo) => {
     try {
       startLoading();
 
@@ -43,14 +43,13 @@ export const TransactionProvider = ({ children }) => {
       finishLoading();
 
       dispatch({
-        type: 'CREATE_TRANSACTION',
+        type: 'ADD_TRANSACTION',
         payload: response.data.transaction,
       });
 
       clearAlert();
     } catch (e) {
       finishLoading();
-      setAlert('error', e.response.data.error, 'Transaction Modal');
     }
   };
 
@@ -91,7 +90,7 @@ export const TransactionProvider = ({ children }) => {
         dateFilter: state.dateFilter,
         transactions: state.transactions,
         changeDateFilter,
-        createTransaction,
+        addTransaction,
         getAllTransactions,
       }}
     >
