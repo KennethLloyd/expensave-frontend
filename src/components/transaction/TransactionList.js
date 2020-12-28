@@ -41,9 +41,6 @@ const TransactionList = () => {
     TransactionContext,
   );
 
-  console.log(dateFilter);
-  console.log(transactions);
-
   useEffect(() => {
     getAllTransactions({ dateFilter });
   }, [dateFilter]);
@@ -60,20 +57,11 @@ const TransactionList = () => {
         <Paper variant="elevation" elevation={2} className={classes.rightPaper}>
           <TransactionDate />
           <Paper elevation={0} className={classes.paperList}>
-            <Transaction />
-            <Transaction />
-            <Transaction />
-            <Transaction />
-            <Transaction />
-            <Transaction />
-            <Transaction />
-            <Transaction />
-            <Transaction />
-            <Transaction />
-            <Transaction />
-            <Transaction />
-            <Transaction />
-            <Transaction />
+            {transactions.map((transaction) => {
+              return (
+                <Transaction transaction={transaction} key={transaction._id} />
+              );
+            })}
           </Paper>
         </Paper>
       </Grid>

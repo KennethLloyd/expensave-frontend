@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Transaction = () => {
+const Transaction = ({ transaction }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -31,16 +31,15 @@ const Transaction = () => {
   return (
     <Accordion expanded={expanded} onChange={handleChange()}>
       <AccordionSummary expandIcon={<ExpandMore />}>
-        <Typography className={classes.heading}>General settings</Typography>
+        <Typography className={classes.heading}>
+          {transaction.transactionDate}
+        </Typography>
         <Typography className={classes.secondaryHeading}>
-          I am an accordion
+          {transaction.name}
         </Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Typography>
-          Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-          Aliquam eget maximus est, id dignissim quam.
-        </Typography>
+        <Typography>{transaction.details}</Typography>
       </AccordionDetails>
     </Accordion>
   );
