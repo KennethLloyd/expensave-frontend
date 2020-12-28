@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 const TransactionDate = () => {
   const classes = useStyles();
   const [date, setDate] = useState(new Date());
-  const { dateFilter, changeDateFilter } = useContext(TransactionContext);
+  const { changeDateFilter } = useContext(TransactionContext);
 
   const changeDate = (operation) => {
     if (operation === 'add') {
@@ -45,7 +45,7 @@ const TransactionDate = () => {
           <KeyboardArrowLeft />
           Back
         </Button>
-        <Typography variant="body1">December 2020</Typography>
+        <Typography variant="body1">{format(date, 'MMMM yyyy')}</Typography>
         <Button
           size="small"
           className={classes.rightButton}

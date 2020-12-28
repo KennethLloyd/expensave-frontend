@@ -53,7 +53,7 @@ export const TransactionProvider = ({ children }) => {
     }
   };
 
-  const getAllTransactions = async (token, transactionFilters) => {
+  const getAllTransactions = async (transactionFilters) => {
     try {
       const from = transactionFilters.dateFilter;
       const to = `${from.split('-')[0]}-${parseInt(from.split('-')[1]) + 1}-01`;

@@ -1,8 +1,9 @@
-import React, { useStat, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Grid, Paper } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import TransactionDate from './TransactionDate';
 import Transaction from './Transaction';
+import { TransactionContext } from '../../context/TransactionState';
 
 const useStyles = makeStyles((theme) => ({
   rightGrid: {
@@ -36,6 +37,11 @@ const useStyles = makeStyles((theme) => ({
 
 const TransactionList = () => {
   const classes = useStyles();
+  const { dateFilter, getAllTransactions } = useContext(TransactionContext);
+
+  console.log(dateFilter);
+
+  useEffect(() => {}, [dateFilter]);
 
   return (
     <Grid item xs={12} sm={8} md={6}>
