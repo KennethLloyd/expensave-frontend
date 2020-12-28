@@ -1,5 +1,5 @@
 import React, { useReducer, createContext, useContext } from 'react';
-import { format } from 'date-fns';
+import { format, add } from 'date-fns';
 import transactionReducer from '../reducers/transactionReducer';
 import api from '../apis/api';
 import { GlobalContext } from './GlobalState';
@@ -55,10 +55,11 @@ export const TransactionProvider = ({ children }) => {
 
   const getAllTransactions = async (transactionFilters) => {
     try {
-      const from = transactionFilters.dateFilter;
-      const to = `${from.split('-')[0]}-${parseInt(from.split('-')[1]) + 1}-01`;
-      console.log(from);
-      console.log(to);
+      const from = format(
+        new Date(transactionFilters.dateFilter),
+        'yyyy-MM-dd',
+      );
+      const to = format(add(new Date(from), { months: 1 }), 'yyyy-MM-dd');
 
       startLoading();
 

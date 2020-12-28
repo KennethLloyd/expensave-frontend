@@ -37,11 +37,16 @@ const useStyles = makeStyles((theme) => ({
 
 const TransactionList = () => {
   const classes = useStyles();
-  const { dateFilter, getAllTransactions } = useContext(TransactionContext);
+  const { dateFilter, getAllTransactions, transactions } = useContext(
+    TransactionContext,
+  );
 
   console.log(dateFilter);
+  console.log(transactions);
 
-  useEffect(() => {}, [dateFilter]);
+  useEffect(() => {
+    getAllTransactions({ dateFilter });
+  }, [dateFilter]);
 
   return (
     <Grid item xs={12} sm={8} md={6}>
