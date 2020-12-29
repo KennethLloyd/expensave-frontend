@@ -61,6 +61,14 @@ export const TransactionProvider = ({ children }) => {
       );
       const to = format(add(new Date(from), { months: 1 }), 'yyyy-MM-dd');
 
+      let transactionType = '';
+
+      if (transactionFilters.trxType) {
+        if (transactionFilters.trxType !== 'All') {
+          transactionType = transactionFilters.trxType;
+        }
+      }
+
       startLoading();
 
       const response = await api.get('/transactions', {
@@ -68,6 +76,7 @@ export const TransactionProvider = ({ children }) => {
         params: {
           from,
           to,
+          transactionType,
         },
       });
 

@@ -41,15 +41,34 @@ const TransactionList = () => {
   const { dateFilter, getAllTransactions, transactions } = useContext(
     TransactionContext,
   );
-  const [tabIndex, setTabIndex] = React.useState(0);
+  const [tabIndex, setTabIndex] = useState(0);
+  const [trxType, setTrxType] = useState('All');
 
   const handleChange = (event, newValue) => {
     setTabIndex(newValue);
+
+    switch (newValue) {
+      case 0: {
+        setTrxType('All');
+        break;
+      }
+      case 1: {
+        setTrxType('Income');
+        break;
+      }
+      case 2: {
+        setTrxType('Expense');
+        break;
+      }
+      default: {
+        setTrxType('ALL');
+      }
+    }
   };
 
   useEffect(() => {
-    getAllTransactions({ dateFilter });
-  }, [dateFilter]);
+    getAllTransactions({ dateFilter, trxType });
+  }, [dateFilter, tabIndex]);
 
   return (
     <Grid item xs={12} sm={8} md={6}>
