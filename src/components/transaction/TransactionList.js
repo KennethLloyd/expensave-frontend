@@ -1,9 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Grid, Paper } from '@material-ui/core';
+import { Grid, Paper, Tabs, Tab } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import TransactionDate from './TransactionDate';
 import Transaction from './Transaction';
 import { TransactionContext } from '../../context/TransactionState';
+import { GetApp, Publish, Sync } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   rightGrid: {
@@ -40,6 +41,11 @@ const TransactionList = () => {
   const { dateFilter, getAllTransactions, transactions } = useContext(
     TransactionContext,
   );
+  const [tabIndex, setTabIndex] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setTabIndex(newValue);
+  };
 
   useEffect(() => {
     getAllTransactions({ dateFilter });
@@ -57,6 +63,18 @@ const TransactionList = () => {
         <Paper variant="elevation" elevation={2} className={classes.rightPaper}>
           <TransactionDate />
           <Paper elevation={0} className={classes.paperList}>
+            <Tabs
+              value={tabIndex}
+              onChange={handleChange}
+              variant="fullWidth"
+              indicatorColor="secondary"
+              textColor="secondary"
+              aria-label="icon label tabs example"
+            >
+              <Tab icon={<Sync />} label="ALL" />
+              <Tab icon={<GetApp />} label="INCOME" />
+              <Tab icon={<Publish />} label="EXPENSES" />
+            </Tabs>
             {transactions.map((transaction) => {
               return (
                 <Transaction transaction={transaction} key={transaction._id} />
