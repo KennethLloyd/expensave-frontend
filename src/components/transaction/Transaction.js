@@ -4,6 +4,7 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  Chip,
 } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
@@ -31,6 +32,14 @@ const Transaction = ({ transaction }) => {
   return (
     <Accordion expanded={expanded} onChange={handleChange()}>
       <AccordionSummary expandIcon={<ExpandMore />}>
+        <Chip
+          size="small"
+          label={transaction.transactionType}
+          color={
+            transaction.transactionType === 'Income' ? 'primary' : 'secondary'
+          }
+        />
+        &nbsp;
         <Typography className={classes.heading}>
           {transaction.transactionDate}
         </Typography>
