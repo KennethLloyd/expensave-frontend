@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import { format } from 'date-fns';
 import { Link } from 'react-router-dom';
 import {
   Grid,
@@ -52,8 +53,8 @@ const useStyles = makeStyles({
 
 const AddTransaction = () => {
   const classes = useStyles();
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
+  const [date, setDate] = useState(format(new Date(), 'yyyy-MM-dd'));
+  const [time, setTime] = useState(format(new Date(), 'HH:mm'));
   const [name, setName] = useState('');
   const [details, setDetails] = useState('');
   const [transactionType, setTransactionType] = useState('Expense');
