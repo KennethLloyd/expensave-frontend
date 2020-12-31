@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
   },
+  accordionJustify: {
+    justifyContent: 'space-between',
+  },
 }));
 
 const Transaction = ({ transaction }) => {
@@ -31,22 +34,26 @@ const Transaction = ({ transaction }) => {
   };
 
   const date = format(new Date(transaction.transactionDate), 'MMM d, hh:mm a');
+  const chipColor =
+    transaction.transactionType === 'Income' ? 'primary' : 'secondary';
+  const sign = transaction.transactionType === 'Income' ? '+' : '-';
 
   return (
     <Accordion expanded={expanded} onChange={handleChange()}>
-      <AccordionSummary expandIcon={<ExpandMore />}>
-        <Chip
-          size="small"
-          label={transaction.transactionType}
-          color={
-            transaction.transactionType === 'Income' ? 'primary' : 'secondary'
-          }
-        />
-        &nbsp;
+      <AccordionSummary
+        classes={{ content: classes.accordionJustify }}
+        expandIcon={<ExpandMore />}
+      >
         <Typography className={classes.heading}>{date}</Typography>
         <Typography className={classes.secondaryHeading}>
           {transaction.name}
         </Typography>
+        &nbsp;
+        <Chip
+          size="small"
+          label={`${sign} ${transaction.amount}`}
+          color={chipColor}
+        />
       </AccordionSummary>
       <AccordionDetails>
         <Typography>{transaction.details}</Typography>
