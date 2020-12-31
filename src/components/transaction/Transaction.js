@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { format } from 'date-fns';
 import {
   Typography,
   Accordion,
@@ -29,6 +30,8 @@ const Transaction = ({ transaction }) => {
     setExpanded(isExpanded ? true : false);
   };
 
+  const date = format(new Date(transaction.transactionDate), 'MMM d, hh:mm a');
+
   return (
     <Accordion expanded={expanded} onChange={handleChange()}>
       <AccordionSummary expandIcon={<ExpandMore />}>
@@ -40,9 +43,7 @@ const Transaction = ({ transaction }) => {
           }
         />
         &nbsp;
-        <Typography className={classes.heading}>
-          {transaction.transactionDate}
-        </Typography>
+        <Typography className={classes.heading}>{date}</Typography>
         <Typography className={classes.secondaryHeading}>
           {transaction.name}
         </Typography>
