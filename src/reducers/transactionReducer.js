@@ -15,7 +15,9 @@ export default (state, action) => {
     case 'GET_TRANSACTIONS':
       return {
         ...state,
-        transactions: action.payload,
+        transactions: action.payload.transactions,
+        monthIncome: action.payload.monthIncome,
+        monthExpenses: action.payload.monthExpenses,
       };
 
     default:

@@ -8,6 +8,8 @@ import { GlobalContext } from './GlobalState';
 const initialState = {
   dateFilter: `${format(new Date(), 'yyyy-MM')}-01`,
   transactions: [],
+  monthIncome: 0,
+  monthExpenses: 0,
 };
 
 // Create Context Object
@@ -84,7 +86,11 @@ export const TransactionProvider = ({ children }) => {
 
       dispatch({
         type: 'GET_TRANSACTIONS',
-        payload: response.data,
+        payload: {
+          transactions: response.data.transactions,
+          monthIncome: response.data.totalIncome,
+          monthExpenses: response.data.totalExpenses,
+        },
       });
 
       clearAlert();
@@ -99,6 +105,8 @@ export const TransactionProvider = ({ children }) => {
       value={{
         dateFilter: state.dateFilter,
         transactions: state.transactions,
+        monthIncome: state.monthIncome,
+        monthExpenses: state.monthExpenses,
         changeDateFilter,
         addTransaction,
         getAllTransactions,

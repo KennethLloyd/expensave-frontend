@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Grid, Paper, Tabs, Tab } from '@material-ui/core';
+import { Grid, Paper, Tabs, Tab, Typography, Box } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import TransactionDate from './TransactionDate';
 import Transaction from './Transaction';
@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     minHeight: '70vh',
     padding: '50px',
+    position: 'relative',
   },
   paperList: {
     maxHeight: '60vh',
@@ -34,13 +35,31 @@ const useStyles = makeStyles((theme) => ({
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
   },
+  monthTotal: {
+    display: 'flex',
+    position: 'absolute',
+    width: '100%',
+    bottom: 0,
+  },
+  monthIncome: {
+    width: '50%',
+    alignSelf: 'center',
+  },
+  monthExpenses: {
+    width: '50%',
+    alignSelf: 'center',
+  },
 }));
 
 const TransactionList = () => {
   const classes = useStyles();
-  const { dateFilter, getAllTransactions, transactions } = useContext(
-    TransactionContext,
-  );
+  const {
+    dateFilter,
+    getAllTransactions,
+    transactions,
+    monthIncome,
+    monthExpenses,
+  } = useContext(TransactionContext);
   const [tabIndex, setTabIndex] = useState(0);
   const [trxType, setTrxType] = useState('All');
 
@@ -100,6 +119,29 @@ const TransactionList = () => {
               );
             })}
           </Paper>
+          <Box className={classes.monthTotal}>
+            <div className={classes.monthIncome}>
+              <Typography>
+                Month Income:{' '}
+                <span>
+                  <Typography variant="h6" color="primary">
+                    {monthIncome}
+                  </Typography>
+                </span>
+              </Typography>
+            </div>
+            &nbsp;
+            <div className={classes.monthExpenses}>
+              <Typography>
+                Month Expenses:{' '}
+                <span>
+                  <Typography variant="h6" color="secondary">
+                    {monthExpenses}
+                  </Typography>
+                </span>
+              </Typography>
+            </div>
+          </Box>
         </Paper>
       </Grid>
     </Grid>
