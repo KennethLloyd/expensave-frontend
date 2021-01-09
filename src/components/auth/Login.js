@@ -13,6 +13,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import { UserContext } from '../../context/UserState';
 
 const useStyles = makeStyles({
+  wideBg: {
+    backgroundImage:
+      'url(https://res.cloudinary.com/kennethlloyd/image/upload/v1610173722/Expensave/background.svg)',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    height: '100vh',
+  },
   loginForm: {
     justifyContent: 'center',
     minHeight: '90vh',
@@ -49,7 +56,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className={classes.wideBg}>
       <AppBar position="static" alignitems="center" color="primary">
         <Toolbar>
           <Grid container justify="center" wrap="wrap">

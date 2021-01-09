@@ -8,23 +8,39 @@ import Home from './Home';
 import Login from './auth/Login';
 import SignUp from './auth/SignUp';
 import ForgotPassword from './auth/ForgotPassword';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import orange from '@material-ui/core/colors/orange';
+import green from '@material-ui/core/colors/green';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: green[500],
+    },
+    secondary: {
+      main: orange[500],
+    },
+  },
+});
 
 const App = () => {
   return (
-    <GlobalProvider>
-      <Router history={history}>
-        <Switch>
-          <AuthenticatedRoute path="/" exact component={Home} />
-          <UnauthenticatedRoute path="/login" exact component={Login} />
-          <UnauthenticatedRoute path="/signup" exact component={SignUp} />
-          <UnauthenticatedRoute
-            path="/forgot-password"
-            exact
-            component={ForgotPassword}
-          />
-        </Switch>
-      </Router>
-    </GlobalProvider>
+    <ThemeProvider theme={theme}>
+      <GlobalProvider>
+        <Router history={history}>
+          <Switch>
+            <AuthenticatedRoute path="/" exact component={Home} />
+            <UnauthenticatedRoute path="/login" exact component={Login} />
+            <UnauthenticatedRoute path="/signup" exact component={SignUp} />
+            <UnauthenticatedRoute
+              path="/forgot-password"
+              exact
+              component={ForgotPassword}
+            />
+          </Switch>
+        </Router>
+      </GlobalProvider>
+    </ThemeProvider>
   );
 };
 
