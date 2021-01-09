@@ -73,6 +73,14 @@ const AddTransaction = () => {
     };
 
     addTransaction(transactionInfo);
+
+    // reset fields
+    setDate(format(new Date(), 'yyyy-MM-dd'));
+    setTime(format(new Date(), 'HH:mm'));
+    setName('');
+    setDetails('');
+    setTransactionType('Expense');
+    setAmount(0.0);
   };
 
   return (
