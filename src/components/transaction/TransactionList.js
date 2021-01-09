@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TransactionList = () => {
+const TransactionList = ({ trxType, setTrxType }) => {
   const classes = useStyles();
   const {
     dateFilter,
@@ -61,7 +61,6 @@ const TransactionList = () => {
     monthExpenses,
   } = useContext(TransactionContext);
   const [tabIndex, setTabIndex] = useState(0);
-  const [trxType, setTrxType] = useState('All');
 
   const handleChange = (event, newValue) => {
     setTabIndex(newValue);

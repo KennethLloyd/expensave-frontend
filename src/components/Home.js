@@ -9,6 +9,7 @@ import { TransactionProvider } from '../context/TransactionState';
 
 const Home = () => {
   const { logOut } = useContext(UserContext);
+  const [trxType, setTrxType] = useState('All');
 
   return (
     <div>
@@ -31,8 +32,8 @@ const Home = () => {
       </AppBar>
       <Grid container spacing={2} justify="space-around" direction="row">
         <TransactionProvider>
-          <AddTransaction />
-          <TransactionList />
+          <AddTransaction trxType={trxType} />
+          <TransactionList trxType={trxType} setTrxType={setTrxType} />
         </TransactionProvider>
       </Grid>
     </div>

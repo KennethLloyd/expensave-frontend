@@ -1,14 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { format } from 'date-fns';
-import { Link } from 'react-router-dom';
-import {
-  Grid,
-  Typography,
-  Paper,
-  Button,
-  TextField,
-  MenuItem,
-} from '@material-ui/core';
+import { Grid, Paper, Button, TextField, MenuItem } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { TransactionContext } from '../../context/TransactionState';
 
@@ -51,7 +43,7 @@ const useStyles = makeStyles({
   },
 });
 
-const AddTransaction = () => {
+const AddTransaction = ({ trxType }) => {
   const classes = useStyles();
   const [date, setDate] = useState(format(new Date(), 'yyyy-MM-dd'));
   const [time, setTime] = useState(format(new Date(), 'HH:mm'));
@@ -72,7 +64,7 @@ const AddTransaction = () => {
       amount,
     };
 
-    addTransaction(transactionInfo);
+    addTransaction(transactionInfo, trxType);
 
     // reset fields
     setDate(format(new Date(), 'yyyy-MM-dd'));

@@ -34,7 +34,7 @@ export const TransactionProvider = ({ children }) => {
   };
 
   // Actions
-  const addTransaction = async (transactionInfo) => {
+  const addTransaction = async (transactionInfo, trxType) => {
     try {
       startLoading();
 
@@ -44,10 +44,9 @@ export const TransactionProvider = ({ children }) => {
 
       finishLoading();
 
-      dispatch({
-        type: 'ADD_TRANSACTION',
-        payload: response.data.transaction,
-      });
+      if (!response.data.error) {
+        getAllTransactions({ dateFilter: state.dateFilter, trxType });
+      }
 
       clearAlert();
     } catch (e) {
