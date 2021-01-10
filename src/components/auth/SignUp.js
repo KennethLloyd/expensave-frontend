@@ -1,14 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Grid,
-  AppBar,
-  Toolbar,
-  Typography,
-  Paper,
-  Button,
-  TextField,
-} from '@material-ui/core';
+import { Grid, Typography, Paper, Button, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { UserContext } from '../../context/UserState';
 
@@ -22,7 +14,7 @@ const useStyles = makeStyles({
   },
   signUpForm: {
     justifyContent: 'center',
-    minHeight: '90vh',
+    minHeight: '100vh',
   },
   buttonBlock: {
     width: '100%',
@@ -64,15 +56,6 @@ const SignUp = () => {
 
   return (
     <div className={classes.wideBg}>
-      <AppBar position="static" alignitems="center" color="primary">
-        <Toolbar>
-          <Grid container justify="center" wrap="wrap">
-            <Grid item>
-              <Typography variant="h6">Expensave</Typography>
-            </Grid>
-          </Grid>
-        </Toolbar>
-      </AppBar>
       <Grid container spacing={0} justify="center" direction="row">
         <Grid item>
           <Grid
