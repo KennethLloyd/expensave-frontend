@@ -26,6 +26,7 @@ const useStyles = makeStyles({
   },
   link: {
     textDecoration: 'none',
+    color: 'inherit',
   },
   loginLink: {
     marginTop: '50px',
@@ -76,6 +77,7 @@ const SignUp = () => {
                 </Typography>
               </Grid>
               <Grid item>
+                <br />
                 <form onSubmit={handleSubmit}>
                   <Grid container direction="column" spacing={2}>
                     <Grid item>
