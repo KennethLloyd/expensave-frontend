@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     overflowX: 'hidden',
     overflow: 'auto',
     marginTop: '30px',
+    marginBottom: '10px',
   },
   link: {
     textDecoration: 'none',
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     position: 'absolute',
     width: '100%',
-    bottom: 0,
+    bottom: '5px',
   },
   monthIncome: {
     width: '50%',

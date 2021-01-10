@@ -18,16 +18,19 @@ const useStyles = makeStyles((theme) => ({
   },
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary,
+    color: '#272727',
   },
   accordionJustify: {
     justifyContent: 'space-between',
+  },
+  details: {
+    color: '#565656',
   },
 }));
 
 const Transaction = ({ transaction }) => {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
 
   const handleChange = () => (event, isExpanded) => {
     setExpanded(isExpanded ? true : false);
@@ -45,7 +48,7 @@ const Transaction = ({ transaction }) => {
         expandIcon={<ExpandMore />}
       >
         <Typography className={classes.heading}>{date}</Typography>
-        <Typography className={classes.secondaryHeading}>
+        <Typography variant="h6" className={classes.secondaryHeading}>
           {transaction.name}
         </Typography>
         &nbsp;
@@ -56,7 +59,9 @@ const Transaction = ({ transaction }) => {
         />
       </AccordionSummary>
       <AccordionDetails>
-        <Typography>{transaction.details}</Typography>
+        <Typography variant="body2" className={classes.details}>
+          {transaction.details}
+        </Typography>
       </AccordionDetails>
     </Accordion>
   );
