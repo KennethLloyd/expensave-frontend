@@ -17,9 +17,11 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       main: green[500],
+      contrastText: '#fff',
     },
     secondary: {
       main: orange[500],
+      contrastText: '#fff',
     },
   },
 });
