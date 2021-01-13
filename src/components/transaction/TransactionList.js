@@ -75,7 +75,7 @@ const TransactionList = ({ trxType, setTrxType }) => {
     monthIncome,
     monthExpenses,
   } = useContext(TransactionContext);
-  const { alertType, alertMessage, alertLocation } = useContext(GlobalContext);
+  const { alertType, alertMessage } = useContext(GlobalContext);
   const [tabIndex, setTabIndex] = useState(0);
   const [alertOpen, setAlertOpen] = useState(false);
 
@@ -176,7 +176,7 @@ const TransactionList = ({ trxType, setTrxType }) => {
           autoHideDuration={6000}
           onClose={handleClose}
         >
-          <Alert onClose={handleClose} severity="error">
+          <Alert onClose={handleClose} severity={alertType}>
             {alertMessage}
           </Alert>
         </Snackbar>

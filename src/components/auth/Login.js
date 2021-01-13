@@ -1,8 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Grid, Typography, Paper, Button, TextField } from '@material-ui/core';
+import {
+  Grid,
+  Typography,
+  Paper,
+  Button,
+  TextField,
+  Snackbar,
+} from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import { UserContext } from '../../context/UserState';
+import { GlobalContext } from '../../context/GlobalState';
+
+const Alert = (props) => {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+};
 
 const useStyles = makeStyles({
   wideBg: {
@@ -38,6 +51,16 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { logIn } = useContext(UserContext);
+  const { alertType, alertMessage } = useContext(GlobalContext);
+  const [alertOpen, setAlertOpen] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setAlertOpen(false);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -47,6 +70,10 @@ const Login = () => {
       password,
     });
   };
+
+  useEffect(() => {
+    if (alertMessage) setAlertOpen(true);
+  }, [alertMessage]);
 
   return (
     <div className={classes.wideBg}>
@@ -123,6 +150,15 @@ const Login = () => {
                 </Link>
               </Grid>
             </Paper>
+            <Snackbar
+              open={alertOpen}
+              autoHideDuration={6000}
+              onClose={handleClose}
+            >
+              <Alert onClose={handleClose} severity={alertType}>
+                {alertMessage}
+              </Alert>
+            </Snackbar>
           </Grid>
         </Grid>
       </Grid>

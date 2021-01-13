@@ -45,7 +45,11 @@ export const UserProvider = ({ children }) => {
       history.push('/');
     } catch (e) {
       finishLoading();
-      setAlert('error', e.response.data.error, 'Log In');
+      clearAlert();
+
+      if (e.response) setAlert('error', e.response.data.error, 'Auth');
+      else setAlert('error', 'Cannot connect to the server', 'Auth');
+
       history.push('/login');
     }
   };
@@ -123,7 +127,10 @@ export const UserProvider = ({ children }) => {
       history.push('/');
     } catch (e) {
       finishLoading();
-      setAlert('error', e.response.data.error, 'Sign Up');
+      clearAlert();
+
+      if (e.response) setAlert('error', e.response.data.error, 'Auth');
+      else setAlert('error', 'Cannot connect to the server', 'Auth');
       history.push('/signup');
     }
   };
