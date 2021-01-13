@@ -1,10 +1,24 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Grid, Paper, Tabs, Tab, Typography, Box } from '@material-ui/core';
+import {
+  Grid,
+  Paper,
+  Tabs,
+  Tab,
+  Typography,
+  Box,
+  Snackbar,
+} from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import TransactionDate from './TransactionDate';
 import Transaction from './Transaction';
 import { TransactionContext } from '../../context/TransactionState';
+import { GlobalContext } from '../../context/GlobalState';
 import { GetApp, Publish, Sync } from '@material-ui/icons';
+
+const Alert = (props) => {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+};
 
 const useStyles = makeStyles((theme) => ({
   rightGrid: {
@@ -61,7 +75,17 @@ const TransactionList = ({ trxType, setTrxType }) => {
     monthIncome,
     monthExpenses,
   } = useContext(TransactionContext);
+  const { alertType, alertMessage, alertLocation } = useContext(GlobalContext);
   const [tabIndex, setTabIndex] = useState(0);
+  const [alertOpen, setAlertOpen] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setAlertOpen(false);
+  };
 
   const handleChange = (event, newValue) => {
     setTabIndex(newValue);
@@ -88,6 +112,10 @@ const TransactionList = ({ trxType, setTrxType }) => {
   useEffect(() => {
     getAllTransactions({ dateFilter, trxType });
   }, [dateFilter, tabIndex]);
+
+  useEffect(() => {
+    if (alertMessage) setAlertOpen(true);
+  }, [alertMessage]);
 
   return (
     <Grid item xs={12} sm={8} md={6}>
@@ -143,6 +171,15 @@ const TransactionList = ({ trxType, setTrxType }) => {
             </div>
           </Box>
         </Paper>
+        <Snackbar
+          open={alertOpen}
+          autoHideDuration={6000}
+          onClose={handleClose}
+        >
+          <Alert onClose={handleClose} severity="error">
+            {alertMessage}
+          </Alert>
+        </Snackbar>
       </Grid>
     </Grid>
   );

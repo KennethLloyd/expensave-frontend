@@ -51,6 +51,10 @@ export const TransactionProvider = ({ children }) => {
       clearAlert();
     } catch (e) {
       finishLoading();
+      clearAlert();
+
+      if (e.response) setAlert('error', e.response.data.error, 'Transactions');
+      else setAlert('error', 'Cannot connect to the server', 'Transactions');
     }
   };
 
@@ -95,7 +99,10 @@ export const TransactionProvider = ({ children }) => {
       clearAlert();
     } catch (e) {
       finishLoading();
-      setAlert('error', e.response.data.error, 'Transactions');
+      clearAlert();
+
+      if (e.response) setAlert('error', e.response.data.error, 'Transactions');
+      else setAlert('error', 'Cannot connect to the server', 'Transactions');
     }
   };
 
