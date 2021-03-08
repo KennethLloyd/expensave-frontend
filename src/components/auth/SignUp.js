@@ -1,37 +1,196 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Alert from '../Alert';
-import SocialLogin from './SocialLogin';
-import Form from './Form';
-import './Auth.scss';
+import {
+  Grid,
+  Typography,
+  Paper,
+  Button,
+  TextField,
+  Snackbar,
+} from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
 import { UserContext } from '../../context/UserState';
+import { GlobalContext } from '../../context/GlobalState';
+
+const Alert = (props) => {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+};
+
+const useStyles = makeStyles({
+  wideBg: {
+    backgroundImage:
+      'url(https://res.cloudinary.com/kennethlloyd/image/upload/v1610173722/Expensave/background.svg)',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    height: '100vh',
+  },
+  signUpForm: {
+    justifyContent: 'center',
+    minHeight: '100vh',
+  },
+  buttonBlock: {
+    width: '100%',
+  },
+  signUpPaper: {
+    justifyContent: 'center',
+    minHeight: '30vh',
+    padding: '50px',
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'inherit',
+  },
+  loginLink: {
+    marginTop: '50px',
+  },
+});
 
 const SignUp = () => {
-  const { signUp } = useContext(UserContext);
+  const classes = useStyles();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { alertType, alertMessage } = useContext(GlobalContext);
+  const [alertOpen, setAlertOpen] = useState(false);
 
-  const handleSignUp = (userDetails) => {
-    signUp(userDetails);
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setAlertOpen(false);
   };
 
+  const { signUp } = useContext(UserContext);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const userInfo = {
+      firstName,
+      lastName,
+      email,
+      password,
+    };
+
+    signUp(userInfo);
+  };
+
+  useEffect(() => {
+    if (alertMessage) setAlertOpen(true);
+  }, [alertMessage]);
+
   return (
-    <div className="auth-container">
-      <h1>Expensave</h1>
-      <div className="auth-card">
-        <h3>Sign Up</h3>
-        <div className="auth-card-fields">
-          <SocialLogin />
-          <div className="auth-card-right">
-            <Form type="Sign Up" submit={handleSignUp} />
-            <Alert location="Sign Up" />
-            <div className="redirect">
-              <p>Already have an account?</p>&nbsp;
-              <span className="accent">
-                <Link to="/login">Log In</Link>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div className={classes.wideBg}>
+      <Grid container spacing={0} justify="center" direction="row">
+        <Grid item>
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            spacing={2}
+            className={classes.signUpForm}
+          >
+            <Paper
+              variant="elevation"
+              elevation={2}
+              className={classes.signUpPaper}
+            >
+              <Grid item>
+                <Typography component="h1" variant="h5" align="center">
+                  Sign up
+                </Typography>
+              </Grid>
+              <Grid item>
+                <br />
+                <form onSubmit={handleSubmit}>
+                  <Grid container direction="column" spacing={2}>
+                    <Grid item>
+                      <TextField
+                        type="string"
+                        placeholder="First name"
+                        fullWidth
+                        name="firstName"
+                        variant="outlined"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        required
+                        autoFocus
+                      />
+                    </Grid>
+                    <Grid item>
+                      <TextField
+                        type="string"
+                        placeholder="Last name"
+                        fullWidth
+                        name="lastName"
+                        variant="outlined"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        required
+                        autoFocus
+                      />
+                    </Grid>
+                    <Grid item>
+                      <TextField
+                        type="email"
+                        placeholder="Email"
+                        fullWidth
+                        name="username"
+                        variant="outlined"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        autoFocus
+                      />
+                    </Grid>
+                    <Grid item>
+                      <TextField
+                        type="password"
+                        placeholder="Password"
+                        fullWidth
+                        name="password"
+                        variant="outlined"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        className={classes.buttonBlock}
+                      >
+                        Submit
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </form>
+              </Grid>
+              <Grid item>
+                <Link to="/login" className={classes.link}>
+                  <Typography variant="body2" className={classes.loginLink}>
+                    Already have an account? Log in
+                  </Typography>
+                </Link>
+              </Grid>
+            </Paper>
+            <Snackbar
+              open={alertOpen}
+              autoHideDuration={6000}
+              onClose={handleClose}
+            >
+              <Alert onClose={handleClose} severity={alertType}>
+                {alertMessage}
+              </Alert>
+            </Snackbar>
+          </Grid>
+        </Grid>
+      </Grid>
     </div>
   );
 };

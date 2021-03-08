@@ -29,7 +29,7 @@ export const UserProvider = ({ children }) => {
     try {
       startLoading();
 
-      const response = await api.post('/users/logIn', userInfo);
+      const response = await api.post('/auth/login', userInfo);
 
       finishLoading();
 
@@ -45,7 +45,11 @@ export const UserProvider = ({ children }) => {
       history.push('/');
     } catch (e) {
       finishLoading();
-      setAlert('error', e.response.data.error, 'Log In');
+      clearAlert();
+
+      if (e.response) setAlert('error', e.response.data.error, 'Auth');
+      else setAlert('error', 'Cannot connect to the server', 'Auth');
+
       history.push('/login');
     }
   };
@@ -107,7 +111,7 @@ export const UserProvider = ({ children }) => {
     try {
       startLoading();
 
-      const response = await api.post('/users', userInfo);
+      const response = await api.post('/auth/signup', userInfo);
 
       finishLoading();
 
@@ -123,21 +127,16 @@ export const UserProvider = ({ children }) => {
       history.push('/');
     } catch (e) {
       finishLoading();
-      setAlert('error', e.response.data.error, 'Sign Up');
+      clearAlert();
+
+      if (e.response) setAlert('error', e.response.data.error, 'Auth');
+      else setAlert('error', 'Cannot connect to the server', 'Auth');
       history.push('/signup');
     }
   };
 
   const logOut = async () => {
     try {
-      startLoading();
-
-      await api.post('/users/logout', null, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      finishLoading();
-
       dispatch({
         type: 'LOG_OUT',
       });
@@ -149,8 +148,6 @@ export const UserProvider = ({ children }) => {
 
       history.push('/login');
     } catch (e) {
-      finishLoading();
-      //setAlert('error', e.response.data.error, 'Dashboard');
       history.push('/');
     }
   };

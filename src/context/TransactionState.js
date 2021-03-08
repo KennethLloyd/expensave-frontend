@@ -1,5 +1,5 @@
 import React, { useReducer, createContext, useContext } from 'react';
-import { format } from 'date-fns';
+import { format, add } from 'date-fns';
 import transactionReducer from '../reducers/transactionReducer';
 import api from '../apis/api';
 import { GlobalContext } from './GlobalState';
@@ -8,6 +8,8 @@ import { GlobalContext } from './GlobalState';
 const initialState = {
   dateFilter: `${format(new Date(), 'yyyy-MM')}-01`,
   transactions: [],
+  monthIncome: 0,
+  monthExpenses: 0,
 };
 
 // Create Context Object
@@ -32,7 +34,7 @@ export const TransactionProvider = ({ children }) => {
   };
 
   // Actions
-  const createTransaction = async (transactionInfo) => {
+  const addTransaction = async (transactionInfo, trxType) => {
     try {
       startLoading();
 
@@ -42,24 +44,35 @@ export const TransactionProvider = ({ children }) => {
 
       finishLoading();
 
-      dispatch({
-        type: 'CREATE_TRANSACTION',
-        payload: response.data.transaction,
-      });
+      if (!response.data.error) {
+        getAllTransactions({ dateFilter: state.dateFilter, trxType });
+      }
 
       clearAlert();
     } catch (e) {
       finishLoading();
-      setAlert('error', e.response.data.error, 'Transaction Modal');
+      clearAlert();
+
+      if (e.response) setAlert('error', e.response.data.error, 'Transactions');
+      else setAlert('error', 'Cannot connect to the server', 'Transactions');
     }
   };
 
-  const getAllTransactions = async (token, transactionFilters) => {
+  const getAllTransactions = async (transactionFilters) => {
     try {
-      const from = transactionFilters.dateFilter;
-      const to = `${from.split('-')[0]}-${parseInt(from.split('-')[1]) + 1}-01`;
-      console.log(from);
-      console.log(to);
+      const from = format(
+        new Date(transactionFilters.dateFilter),
+        'yyyy-MM-dd',
+      );
+      const to = format(add(new Date(from), { months: 1 }), 'yyyy-MM-dd');
+
+      let transactionType = '';
+
+      if (transactionFilters.trxType) {
+        if (transactionFilters.trxType !== 'All') {
+          transactionType = transactionFilters.trxType;
+        }
+      }
 
       startLoading();
 
@@ -68,6 +81,7 @@ export const TransactionProvider = ({ children }) => {
         params: {
           from,
           to,
+          transactionType,
         },
       });
 
@@ -75,13 +89,20 @@ export const TransactionProvider = ({ children }) => {
 
       dispatch({
         type: 'GET_TRANSACTIONS',
-        payload: response.data,
+        payload: {
+          transactions: response.data.transactions,
+          monthIncome: response.data.totalIncome,
+          monthExpenses: response.data.totalExpenses,
+        },
       });
 
       clearAlert();
     } catch (e) {
       finishLoading();
-      setAlert('error', e.response.data.error, 'Transactions');
+      clearAlert();
+
+      if (e.response) setAlert('error', e.response.data.error, 'Transactions');
+      else setAlert('error', 'Cannot connect to the server', 'Transactions');
     }
   };
 
@@ -90,8 +111,10 @@ export const TransactionProvider = ({ children }) => {
       value={{
         dateFilter: state.dateFilter,
         transactions: state.transactions,
+        monthIncome: state.monthIncome,
+        monthExpenses: state.monthExpenses,
         changeDateFilter,
-        createTransaction,
+        addTransaction,
         getAllTransactions,
       }}
     >

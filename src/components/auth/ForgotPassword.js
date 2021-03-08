@@ -1,66 +1,111 @@
-import React, { useState, useContext } from 'react';
-import './ResetPassword.scss';
-import Alert from '../Alert';
-import { GlobalContext } from '../../context/GlobalState';
-import { UserContext } from '../../context/UserState';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Grid, Typography, Paper, Button, TextField } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
-const ForgotPassword = () => {
+const useStyles = makeStyles({
+  wideBg: {
+    backgroundImage:
+      'url(https://res.cloudinary.com/kennethlloyd/image/upload/v1610173722/Expensave/background.svg)',
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
+    height: '100vh',
+  },
+  forgotForm: {
+    justifyContent: 'center',
+    minHeight: '100vh',
+  },
+  buttonBlock: {
+    width: '100%',
+  },
+  forgotPaper: {
+    justifyContent: 'center',
+    minHeight: '30vh',
+    padding: '50px',
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'inherit',
+  },
+  loginLink: {
+    marginTop: '50px',
+  },
+});
+
+const Login = () => {
+  const classes = useStyles();
   const [email, setEmail] = useState('');
-  const { forgotPassword } = useContext(UserContext);
-  const { setAlert } = useContext(GlobalContext);
 
-  const handleForgotPassword = (userDetails) => {
-    forgotPassword(userDetails);
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  const validateEmail = (inputValue) => {
-    // eslint-disable-next-line no-useless-escape
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputValue)) {
-      return;
-    }
-    // eslint-disable-next-line no-throw-literal
-    throw 'Invalid email';
-  };
-
-  const validate = () => {
-    try {
-      const userDetails = {};
-
-      validateEmail(email);
-
-      userDetails.email = email;
-
-      handleForgotPassword(userDetails);
-    } catch (e) {
-      setAlert('error', e, 'Forgot Password');
-    }
+    console.log(email);
   };
 
   return (
-    <div className="reset-container">
-      <h1>Expensave</h1>
-      <div className="reset-card">
-        <h3>Forgot Password</h3>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
-          className="reset-form"
-        >
-          <input
-            type="email"
-            placeholder="Email Address"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-          />
-          <button onClick={validate}>Submit</button>
-        </form>
-        <Alert location="Forgot Password" />
-      </div>
+    <div className={classes.wideBg}>
+      <Grid container spacing={0} justify="center" direction="row">
+        <Grid item>
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            spacing={2}
+            className={classes.forgotForm}
+          >
+            <Paper
+              variant="elevation"
+              elevation={2}
+              className={classes.forgotPaper}
+            >
+              <Grid item>
+                <Typography component="h1" variant="h5" align="center">
+                  Forgot Password
+                </Typography>
+              </Grid>
+              <Grid item>
+                <br />
+                <form onSubmit={handleSubmit}>
+                  <Grid container direction="column" spacing={2}>
+                    <Grid item>
+                      <TextField
+                        type="email"
+                        placeholder="Email"
+                        fullWidth
+                        name="username"
+                        variant="outlined"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        autoFocus
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        className={classes.buttonBlock}
+                      >
+                        Submit
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </form>
+              </Grid>
+              <Grid item>
+                <Link to="/login" className={classes.link}>
+                  <Typography variant="body2" className={classes.loginLink}>
+                    Back to Login
+                  </Typography>
+                </Link>
+              </Grid>
+            </Paper>
+          </Grid>
+        </Grid>
+      </Grid>
     </div>
   );
 };
 
-export default ForgotPassword;
+export default Login;
